@@ -1,0 +1,1201 @@
+Log file initialized:output_20260216_114656/log.txt
+Read calculation parameters.
+Read calculation parameters.
+dx =  0.0005
+dt =  1.25e-05
+crno =  0.25
+c_wave =  10.0
+Tduration =  1.0
+nofduration =  200
+nprint =  200
+init_1d =  0
+init_mend_stn =  0
+init_0d =  0
+init_peri_params =  0
+mstn =  1
+geometry =  2
+converge_err =  0.001
+converge_err_Parm =  0.001
+converge_err_cereb =  0.001
+converge_err_LMA =  0.001
+alpha =  0.9
+alpha_4DFlow =  0.9
+alpha_SPECT =  0.9
+alpha_LMA =  0.9
+visualization =  0
+viz_str =  20
+viz_end =  21
+PR_reg_total =  1
+PR_reg_cereb =  1
+PR_reg_LMA =  0
+r_com_reg =  0
+r_com_read =  0
+vsurg_stn =  1
+vsurg_stn_qap_init =  1
+sim_LMA =  0
+RLMA_calc =  0
+cow_geo =  0
+cow_geo_name =  0: Complete
+adjust_stn_effect =  0
+simplified_output =  1
+ro =  1060.0
+frm =  0.0047
+age =  70.0
+p0mmhg =  85.0
+Parm_ref =  112.0
+Read literature data of arterial tree.
+n_CoW = [58 61 63 65 67 70 40 47 56]
+Read Reference CoW flow rates.
+Reference CoW flow rates [ml/min]:
+order_CoW = [[63 65  0]
+ [58 61 63]
+ [65 70 67]]
+Aging parameters c_ela_aor, c_res = 2.614274109605541, 1.09
+Calculated the effect of aging.
+Read patient-specific geometry of CoW.
+Calculated the cross-sectional area of each artery.
+Didn't read adjusted radii of communicating arteries from R_com_adjusted.csv. Use default values. (r_com_read=0)
+Reading stenosis parameters from Stenosis.csv.
+Number of stenosis = 1
+Artery no. 40: Stenosis at node no.6-110, neck at node no.40, reduction ratio = 0.99
+geometry = 2: Artery no. 40, Stenosis at node no.3-57, neck at node no.21, reduction ratio = 0.99
+Calculating the resistance of stenosis for geometry=2.
+A2InvSum = 1432196316.2099066
+Artery no:40,1st term Resistance of stenosis = 169176591.1989281
+Stenosis artery no.40: r_st = 1.691766e+08 [Pa.s/m^3], b_st = 8.063296e+13 [Pa.s^2/m^6], y_st = 1.631472e+06 [1/(Pa.s)]
+Stenosis parameters have been written to:output_20260216_114656/Stenosis_param.csv
+Reading Uncertainty range from UR_CoW.csv...
+Artery no.47: UR_min=5.02 mm, UR_max=6.56 mm
+Artery no.40: UR_min=3.49 mm, UR_max=4.72 mm
+Artery no.60: UR_min=3.08 mm, UR_max=4.92 mm
+Artery no.68: UR_min=2.46 mm, UR_max=4.31 mm
+Artery no.56: UR_min=2.36 mm, UR_max=3.28 mm
+Artery no.62: UR_min=1.85 mm, UR_max=3.28 mm
+Artery no.66: UR_min=1.54 mm, UR_max=2.87 mm
+Artery no.63: UR_min=1.95 mm, UR_max=2.87 mm
+Artery no.65: UR_min=1.64 mm, UR_max=2.87 mm
+Artery no.61: UR_min=2.46 mm, UR_max=3.69 mm
+Artery no.67: UR_min=2.15 mm, UR_max=3.28 mm
+Artery no.57: UR_min=2.36 mm, UR_max=3.18 mm
+Artery no.71: UR_min=2.36 mm, UR_max=3.28 mm
+Artery no.58: UR_min=2.36 mm, UR_max=3.18 mm
+Artery no.70: UR_min=2.36 mm, UR_max=3.18 mm
+Artery no.64: UR_min=0.41 mm, UR_max=2.46 mm
+Artery no.59: UR_min=0.41 mm, UR_max=2.05 mm
+Artery no.69: UR_min=0.41 mm, UR_max=2.05 mm
+Arterial geometry has been written into output_20260216_114656/Geometry_copy.csv
+1th artery Eh/(r(1-ξ^2)) = 144726.21470776675, wave speed c = 8.262389630689412
+2th artery Eh/(r(1-ξ^2)) = 144726.21470776675, wave speed c = 8.262389630689412
+3th artery Eh/(r(1-ξ^2)) = 193571.3288240288, wave speed c = 9.555481703052552
+4th artery Eh/(r(1-ξ^2)) = 154867.80096385445, wave speed c = 8.546978969861344
+5th artery Eh/(r(1-ξ^2)) = 193900.2649808631, wave speed c = 9.563597081742651
+6th artery Eh/(r(1-ξ^2)) = 221700.55683261508, wave speed c = 10.2262277676085
+7th artery Eh/(r(1-ξ^2)) = 186536.5564124618, wave speed c = 9.38024209197137
+8th artery Eh/(r(1-ξ^2)) = 296557.7537256046, wave speed c = 11.82732991378173
+9th artery Eh/(r(1-ξ^2)) = 233494.58411707645, wave speed c = 10.494710799836549
+10th artery Eh/(r(1-ξ^2)) = 144726.21470776678, wave speed c = 8.262389630689414
+11th artery Eh/(r(1-ξ^2)) = 193716.84356096023, wave speed c = 9.559072633065748
+12th artery Eh/(r(1-ξ^2)) = 144726.21470776742, wave speed c = 8.262389630689432
+13th artery Eh/(r(1-ξ^2)) = 144726.21470786503, wave speed c = 8.262389630692219
+14th artery Eh/(r(1-ξ^2)) = 274884.634425183, wave speed c = 11.386947062672471
+15th artery Eh/(r(1-ξ^2)) = 154867.80096385445, wave speed c = 8.546978969861344
+16th artery Eh/(r(1-ξ^2)) = 422257.38693281333, wave speed c = 14.113044062290644
+17th artery Eh/(r(1-ξ^2)) = 186536.5564124618, wave speed c = 9.38024209197137
+18th artery Eh/(r(1-ξ^2)) = 233494.58411707645, wave speed c = 10.494710799836549
+19th artery Eh/(r(1-ξ^2)) = 296557.7537256046, wave speed c = 11.82732991378173
+20th artery Eh/(r(1-ξ^2)) = 187334.44402798882, wave speed c = 9.400282112085105
+21th artery Eh/(r(1-ξ^2)) = 227039.301909936, wave speed c = 10.348623596154006
+22th artery Eh/(r(1-ξ^2)) = 247060.6371544242, wave speed c = 10.795278430573077
+23th artery Eh/(r(1-ξ^2)) = 189897.12394462514, wave speed c = 9.464360256679763
+24th artery Eh/(r(1-ξ^2)) = 210148.66245748493, wave speed c = 9.956240634611307
+25th artery Eh/(r(1-ξ^2)) = 144726.21471468994, wave speed c = 8.262389630887034
+26th artery Eh/(r(1-ξ^2)) = 183938.48563287675, wave speed c = 9.314689292686122
+27th artery Eh/(r(1-ξ^2)) = 144726.2147438935, wave speed c = 8.262389631720648
+28th artery Eh/(r(1-ξ^2)) = 194569.74258663654, wave speed c = 9.580092925718132
+29th artery Eh/(r(1-ξ^2)) = 144726.2147807248, wave speed c = 8.262389632771994
+30th artery Eh/(r(1-ξ^2)) = 194569.74258663654, wave speed c = 9.580092925718132
+31th artery Eh/(r(1-ξ^2)) = 144726.2161783912, wave speed c = 8.262389672668236
+32th artery Eh/(r(1-ξ^2)) = 173542.2882495917, wave speed c = 9.04762786198972
+33th artery Eh/(r(1-ξ^2)) = 144726.2680426886, wave speed c = 8.262391153129096
+34th artery Eh/(r(1-ξ^2)) = 166743.33356086852, wave speed c = 8.868625363076195
+35th artery Eh/(r(1-ξ^2)) = 272800.6991550988, wave speed c = 11.343702000368301
+36th artery Eh/(r(1-ξ^2)) = 338194.8986203381, wave speed c = 12.630356114363172
+37th artery Eh/(r(1-ξ^2)) = 205857.7643775971, wave speed c = 9.854071191443483
+38th artery Eh/(r(1-ξ^2)) = 217339.28151678378, wave speed c = 10.125143407248652
+39th artery Eh/(r(1-ξ^2)) = 182877.06738991814, wave speed c = 9.287775171522718
+40th artery Eh/(r(1-ξ^2)) = 185041.89778268136, wave speed c = 9.342586047151753
+41th artery Eh/(r(1-ξ^2)) = 324873.3735817373, wave speed c = 12.37910163743218
+42th artery Eh/(r(1-ξ^2)) = 377311.6950689152, wave speed c = 13.340810119897093
+43th artery Eh/(r(1-ξ^2)) = 514222.8024639273, wave speed c = 15.574271273177816
+44th artery Eh/(r(1-ξ^2)) = 454809.22576600563, wave speed c = 14.646933251135207
+45th artery Eh/(r(1-ξ^2)) = 454809.22576600563, wave speed c = 14.646933251135207
+46th artery Eh/(r(1-ξ^2)) = 514222.8024639273, wave speed c = 15.574271273177816
+47th artery Eh/(r(1-ξ^2)) = 183420.9525621437, wave speed c = 9.301576062490389
+48th artery Eh/(r(1-ξ^2)) = 180391.4689471913, wave speed c = 9.224441204817122
+49th artery Eh/(r(1-ξ^2)) = 166743.33356086852, wave speed c = 8.868625363076195
+50th artery Eh/(r(1-ξ^2)) = 272800.6991550988, wave speed c = 11.343702000368301
+51th artery Eh/(r(1-ξ^2)) = 338194.8986203381, wave speed c = 12.630356114363172
+52th artery Eh/(r(1-ξ^2)) = 205857.7643775971, wave speed c = 9.854071191443483
+53th artery Eh/(r(1-ξ^2)) = 217339.28151678378, wave speed c = 10.125143407248652
+54th artery Eh/(r(1-ξ^2)) = 324873.3735817373, wave speed c = 12.37910163743218
+55th artery Eh/(r(1-ξ^2)) = 377311.6950689152, wave speed c = 13.340810119897093
+56th artery Eh/(r(1-ξ^2)) = 246230.03588317777, wave speed c = 10.777116652478139
+57th artery Eh/(r(1-ξ^2)) = 248077.29093933702, wave speed c = 10.817466896909139
+58th artery Eh/(r(1-ξ^2)) = 264825.70441787667, wave speed c = 11.176662520751533
+59th artery Eh/(r(1-ξ^2)) = 508562.80350639264, wave speed c = 15.488321886553946
+60th artery Eh/(r(1-ξ^2)) = 156972.6456259345, wave speed c = 8.60486494762993
+61th artery Eh/(r(1-ξ^2)) = 181893.14014347392, wave speed c = 9.262756123912181
+62th artery Eh/(r(1-ξ^2)) = 284917.2384826484, wave speed c = 11.592882463501905
+63th artery Eh/(r(1-ξ^2)) = 268383.95541848114, wave speed c = 11.251497917436415
+64th artery Eh/(r(1-ξ^2)) = 299178.87452714384, wave speed c = 11.879482759195
+65th artery Eh/(r(1-ξ^2)) = 232062.17727015226, wave speed c = 10.462470605223517
+66th artery Eh/(r(1-ξ^2)) = 282409.76694652525, wave speed c = 11.541756981502386
+67th artery Eh/(r(1-ξ^2)) = 221563.119084205, wave speed c = 10.223057528371763
+68th artery Eh/(r(1-ξ^2)) = 203535.3325918409, wave speed c = 9.798328038734054
+69th artery Eh/(r(1-ξ^2)) = 306452.26074879215, wave speed c = 12.023017640484127
+70th artery Eh/(r(1-ξ^2)) = 361413.03030681435, wave speed c = 13.056716451096976
+71th artery Eh/(r(1-ξ^2)) = 237446.2843002447, wave speed c = 10.583145292991505
+72th artery Eh/(r(1-ξ^2)) = 154727.09560502943, wave speed c = 8.543095402661505
+73th artery Eh/(r(1-ξ^2)) = 154727.09560502943, wave speed c = 8.543095402661505
+74th artery Eh/(r(1-ξ^2)) = 657445.5132180705, wave speed c = 17.610105284231874
+75th artery Eh/(r(1-ξ^2)) = 657445.5132180705, wave speed c = 17.610105284231874
+76th artery Eh/(r(1-ξ^2)) = 196641.945397464, wave speed c = 9.630972672655929
+77th artery Eh/(r(1-ξ^2)) = 196641.945397464, wave speed c = 9.630972672655929
+78th artery Eh/(r(1-ξ^2)) = 616889.2062783347, wave speed c = 17.05829635865176
+79th artery Eh/(r(1-ξ^2)) = 616889.2062783347, wave speed c = 17.05829635865176
+80th artery Eh/(r(1-ξ^2)) = 484624.3718811887, wave speed c = 15.11940481073079
+81th artery Eh/(r(1-ξ^2)) = 484624.3718811887, wave speed c = 15.11940481073079
+82th artery Eh/(r(1-ξ^2)) = 484624.3718811887, wave speed c = 15.11940481073079
+83th artery Eh/(r(1-ξ^2)) = 484624.3718811887, wave speed c = 15.11940481073079
+R_treetotal = 0.6389133346598419, C_treetotal = 1.8290630503412078
+Initial peripheral parameters have been written into output_20260216_114656/Initial_Peripheral_params.csv
+Flow rate Q at the middle of the artery, cycle mean will be output to output_20260216_114656/Q_1dmean.csv.
+Pressure P at the middle of the artery, cycle mean will be output to output_20260216_114656/P_1dmean.csv.
+Cross section area A at the middle of the artery, cycle mean will be output to output_20260216_114656/A_1dmean.csv.
+Adjusted Peripheral resistance PR will be output to output_20260216_114656/PR_Adjusted.csv.
+Adjusted Peripheral resistance PR of CoW outlet will be output to output_20260216_114656/PR_Adjusted_CoW_outlet.csv.
+Convergence log will be output to output_20260216_114656/log_convergence.csv.
+Elapsed time log per cycle will be output to output_20260216_114656/time_log_cycle.csv.
+Output directory 'output_20260216_114656/new_initial_conditions/' created.
+dt = 1.25e-05 [s]
+nduration: no. of cardiac cycles to compute = 80000
+nlast: total time step in the simulation = 16000000
+LMA geometry imported from LMAgeometry.csv:
+LMA artery no.84: LMA count avg = 3.35, LMA radius avg = 0.34072 mm
+LMA artery no.85: LMA count avg = 16.98, LMA radius avg = 0.15435 mm
+LMA artery no.86: LMA count avg = 19.95, LMA radius avg = 0.176177 mm
+LMA artery no.87: LMA count avg = 18.11, LMA radius avg = 0.249136 mm
+LMA artery no.88: LMA count avg = 30.11, LMA radius avg = 0.159529 mm
+LMA artery no.89: LMA count avg = 14.44, LMA radius avg = 0.118545 mm
+LMA artery no.90: LMA count avg = 0.9, LMA radius avg = 0.059292 mm
+Disregarding LMA artery no.90. LMA count avg = 0.9, LMA radius avg = 0.059292 mm
+Initial reference pressure p0 = 11332.401313999999 [Pa]
+Initialize 0d model conditions.
+********************Start calculation loop********************
+Initialize 0d model calculation.
+Initializing bifurcation calculation.
+8000 time step(s) out of 16000000 completed(1th cardiac cycle 1/10). Time elapsed = 20.83 [s].
+16000 time step(s) out of 16000000 completed(1th cardiac cycle 2/10). Time elapsed = 26.51 [s].
+24000 time step(s) out of 16000000 completed(1th cardiac cycle 3/10). Time elapsed = 32.19 [s].
+32000 time step(s) out of 16000000 completed(1th cardiac cycle 4/10). Time elapsed = 37.89 [s].
+40000 time step(s) out of 16000000 completed(1th cardiac cycle 5/10). Time elapsed = 43.58 [s].
+48000 time step(s) out of 16000000 completed(1th cardiac cycle 6/10). Time elapsed = 49.32 [s].
+56000 time step(s) out of 16000000 completed(1th cardiac cycle 7/10). Time elapsed = 55.02 [s].
+64000 time step(s) out of 16000000 completed(1th cardiac cycle 8/10). Time elapsed = 60.77 [s].
+72000 time step(s) out of 16000000 completed(1th cardiac cycle 9/10). Time elapsed = 66.52 [s].
+80000 time step(s) out of 16000000 completed(1th cardiac cycle 10/10). Time elapsed = 72.26 [s].
+Finished Cycle no. = 1.0. Time elapsed = 72.26 [s]
+88000 time step(s) out of 16000000 completed(2th cardiac cycle 1/10). Time elapsed = 78.06 [s].
+96000 time step(s) out of 16000000 completed(2th cardiac cycle 2/10). Time elapsed = 83.77 [s].
+104000 time step(s) out of 16000000 completed(2th cardiac cycle 3/10). Time elapsed = 89.49 [s].
+112000 time step(s) out of 16000000 completed(2th cardiac cycle 4/10). Time elapsed = 95.17 [s].
+120000 time step(s) out of 16000000 completed(2th cardiac cycle 5/10). Time elapsed = 100.83 [s].
+128000 time step(s) out of 16000000 completed(2th cardiac cycle 6/10). Time elapsed = 106.49 [s].
+136000 time step(s) out of 16000000 completed(2th cardiac cycle 7/10). Time elapsed = 112.24 [s].
+144000 time step(s) out of 16000000 completed(2th cardiac cycle 8/10). Time elapsed = 117.93 [s].
+152000 time step(s) out of 16000000 completed(2th cardiac cycle 9/10). Time elapsed = 123.64 [s].
+160000 time step(s) out of 16000000 completed(2th cardiac cycle 10/10). Time elapsed = 129.39 [s].
+Finished Cycle no. = 2.0. Time elapsed = 129.39 [s]
+Checking convergence...
+Q not converged at every artery! Max rel_err_Qartery = 0.3195044960718559 at artery no. 15
+Parm(artery no. 17) not converged! rel_err_Parm = 0.12557076406444181
+Qoutmean_CoW not converged! Max rel_err_QCoWOut = 0.879001106735676 at artery no. 65
+Everything hasn't converged! if_conv = 0.
+168000 time step(s) out of 16000000 completed(3th cardiac cycle 1/10). Time elapsed = 135.02 [s].
+176000 time step(s) out of 16000000 completed(3th cardiac cycle 2/10). Time elapsed = 140.62 [s].
+184000 time step(s) out of 16000000 completed(3th cardiac cycle 3/10). Time elapsed = 146.20 [s].
+192000 time step(s) out of 16000000 completed(3th cardiac cycle 4/10). Time elapsed = 151.72 [s].
+200000 time step(s) out of 16000000 completed(3th cardiac cycle 5/10). Time elapsed = 157.21 [s].
+208000 time step(s) out of 16000000 completed(3th cardiac cycle 6/10). Time elapsed = 162.71 [s].
+216000 time step(s) out of 16000000 completed(3th cardiac cycle 7/10). Time elapsed = 168.26 [s].
+224000 time step(s) out of 16000000 completed(3th cardiac cycle 8/10). Time elapsed = 173.80 [s].
+232000 time step(s) out of 16000000 completed(3th cardiac cycle 9/10). Time elapsed = 179.37 [s].
+240000 time step(s) out of 16000000 completed(3th cardiac cycle 10/10). Time elapsed = 185.00 [s].
+Finished Cycle no. = 3.0. Time elapsed = 185.00 [s]
+248000 time step(s) out of 16000000 completed(4th cardiac cycle 1/10). Time elapsed = 190.62 [s].
+256000 time step(s) out of 16000000 completed(4th cardiac cycle 2/10). Time elapsed = 196.20 [s].
+264000 time step(s) out of 16000000 completed(4th cardiac cycle 3/10). Time elapsed = 201.80 [s].
+272000 time step(s) out of 16000000 completed(4th cardiac cycle 4/10). Time elapsed = 207.39 [s].
+280000 time step(s) out of 16000000 completed(4th cardiac cycle 5/10). Time elapsed = 212.92 [s].
+288000 time step(s) out of 16000000 completed(4th cardiac cycle 6/10). Time elapsed = 218.51 [s].
+296000 time step(s) out of 16000000 completed(4th cardiac cycle 7/10). Time elapsed = 224.07 [s].
+304000 time step(s) out of 16000000 completed(4th cardiac cycle 8/10). Time elapsed = 229.70 [s].
+312000 time step(s) out of 16000000 completed(4th cardiac cycle 9/10). Time elapsed = 235.34 [s].
+320000 time step(s) out of 16000000 completed(4th cardiac cycle 10/10). Time elapsed = 240.94 [s].
+Finished Cycle no. = 4.0. Time elapsed = 240.94 [s]
+Checking convergence...
+Q not converged at every artery! Max rel_err_Qartery = 0.19460261208208524 at artery no. 64
+Parm(artery no. 17) not converged! rel_err_Parm = 0.19475321253352287
+Qoutmean_CoW not converged! Max rel_err_QCoWOut = 0.06682617771733676 at artery no. 70
+Everything hasn't converged! if_conv = 0.
+328000 time step(s) out of 16000000 completed(5th cardiac cycle 1/10). Time elapsed = 246.57 [s].
+336000 time step(s) out of 16000000 completed(5th cardiac cycle 2/10). Time elapsed = 252.16 [s].
+344000 time step(s) out of 16000000 completed(5th cardiac cycle 3/10). Time elapsed = 257.71 [s].
+352000 time step(s) out of 16000000 completed(5th cardiac cycle 4/10). Time elapsed = 263.22 [s].
+360000 time step(s) out of 16000000 completed(5th cardiac cycle 5/10). Time elapsed = 268.73 [s].
+368000 time step(s) out of 16000000 completed(5th cardiac cycle 6/10). Time elapsed = 274.25 [s].
+376000 time step(s) out of 16000000 completed(5th cardiac cycle 7/10). Time elapsed = 279.77 [s].
+384000 time step(s) out of 16000000 completed(5th cardiac cycle 8/10). Time elapsed = 285.36 [s].
+392000 time step(s) out of 16000000 completed(5th cardiac cycle 9/10). Time elapsed = 290.99 [s].
+400000 time step(s) out of 16000000 completed(5th cardiac cycle 10/10). Time elapsed = 296.57 [s].
+Finished Cycle no. = 5.0. Time elapsed = 296.57 [s]
+408000 time step(s) out of 16000000 completed(6th cardiac cycle 1/10). Time elapsed = 302.19 [s].
+416000 time step(s) out of 16000000 completed(6th cardiac cycle 2/10). Time elapsed = 307.84 [s].
+424000 time step(s) out of 16000000 completed(6th cardiac cycle 3/10). Time elapsed = 313.42 [s].
+432000 time step(s) out of 16000000 completed(6th cardiac cycle 4/10). Time elapsed = 318.91 [s].
+440000 time step(s) out of 16000000 completed(6th cardiac cycle 5/10). Time elapsed = 324.43 [s].
+448000 time step(s) out of 16000000 completed(6th cardiac cycle 6/10). Time elapsed = 329.99 [s].
+456000 time step(s) out of 16000000 completed(6th cardiac cycle 7/10). Time elapsed = 335.61 [s].
+464000 time step(s) out of 16000000 completed(6th cardiac cycle 8/10). Time elapsed = 341.16 [s].
+472000 time step(s) out of 16000000 completed(6th cardiac cycle 9/10). Time elapsed = 346.76 [s].
+480000 time step(s) out of 16000000 completed(6th cardiac cycle 10/10). Time elapsed = 352.36 [s].
+Finished Cycle no. = 6.0. Time elapsed = 352.36 [s]
+Checking convergence...
+Q not converged at every artery! Max rel_err_Qartery = 0.06834289425653461 at artery no. 15
+Parm(artery no. 17) not converged! rel_err_Parm = 0.2328122916604071
+Qoutmean_CoW not converged! Max rel_err_QCoWOut = 0.017261992197589428 at artery no. 61
+Everything hasn't converged! if_conv = 0.
+488000 time step(s) out of 16000000 completed(7th cardiac cycle 1/10). Time elapsed = 358.03 [s].
+496000 time step(s) out of 16000000 completed(7th cardiac cycle 2/10). Time elapsed = 363.73 [s].
+504000 time step(s) out of 16000000 completed(7th cardiac cycle 3/10). Time elapsed = 369.40 [s].
+512000 time step(s) out of 16000000 completed(7th cardiac cycle 4/10). Time elapsed = 374.98 [s].
+520000 time step(s) out of 16000000 completed(7th cardiac cycle 5/10). Time elapsed = 380.52 [s].
+528000 time step(s) out of 16000000 completed(7th cardiac cycle 6/10). Time elapsed = 386.08 [s].
+536000 time step(s) out of 16000000 completed(7th cardiac cycle 7/10). Time elapsed = 391.70 [s].
+544000 time step(s) out of 16000000 completed(7th cardiac cycle 8/10). Time elapsed = 397.26 [s].
+552000 time step(s) out of 16000000 completed(7th cardiac cycle 9/10). Time elapsed = 402.90 [s].
+560000 time step(s) out of 16000000 completed(7th cardiac cycle 10/10). Time elapsed = 408.62 [s].
+Finished Cycle no. = 7.0. Time elapsed = 408.62 [s]
+568000 time step(s) out of 16000000 completed(8th cardiac cycle 1/10). Time elapsed = 414.25 [s].
+576000 time step(s) out of 16000000 completed(8th cardiac cycle 2/10). Time elapsed = 420.06 [s].
+584000 time step(s) out of 16000000 completed(8th cardiac cycle 3/10). Time elapsed = 425.72 [s].
+592000 time step(s) out of 16000000 completed(8th cardiac cycle 4/10). Time elapsed = 431.34 [s].
+600000 time step(s) out of 16000000 completed(8th cardiac cycle 5/10). Time elapsed = 437.06 [s].
+608000 time step(s) out of 16000000 completed(8th cardiac cycle 6/10). Time elapsed = 442.76 [s].
+616000 time step(s) out of 16000000 completed(8th cardiac cycle 7/10). Time elapsed = 448.34 [s].
+624000 time step(s) out of 16000000 completed(8th cardiac cycle 8/10). Time elapsed = 454.00 [s].
+632000 time step(s) out of 16000000 completed(8th cardiac cycle 9/10). Time elapsed = 459.63 [s].
+640000 time step(s) out of 16000000 completed(8th cardiac cycle 10/10). Time elapsed = 465.21 [s].
+Finished Cycle no. = 8.0. Time elapsed = 465.21 [s]
+Checking convergence...
+Q not converged at every artery! Max rel_err_Qartery = 0.04947307338829211 at artery no. 15
+Parm(artery no. 17) not converged! rel_err_Parm = 0.2297461592583243
+Qoutmean_CoW not converged! Max rel_err_QCoWOut = 0.052982136251900305 at artery no. 65
+Everything hasn't converged! if_conv = 0.
+648000 time step(s) out of 16000000 completed(9th cardiac cycle 1/10). Time elapsed = 470.88 [s].
+656000 time step(s) out of 16000000 completed(9th cardiac cycle 2/10). Time elapsed = 476.46 [s].
+664000 time step(s) out of 16000000 completed(9th cardiac cycle 3/10). Time elapsed = 482.00 [s].
+672000 time step(s) out of 16000000 completed(9th cardiac cycle 4/10). Time elapsed = 487.55 [s].
+680000 time step(s) out of 16000000 completed(9th cardiac cycle 5/10). Time elapsed = 493.09 [s].
+688000 time step(s) out of 16000000 completed(9th cardiac cycle 6/10). Time elapsed = 498.63 [s].
+696000 time step(s) out of 16000000 completed(9th cardiac cycle 7/10). Time elapsed = 504.16 [s].
+704000 time step(s) out of 16000000 completed(9th cardiac cycle 8/10). Time elapsed = 509.69 [s].
+712000 time step(s) out of 16000000 completed(9th cardiac cycle 9/10). Time elapsed = 515.21 [s].
+720000 time step(s) out of 16000000 completed(9th cardiac cycle 10/10). Time elapsed = 520.78 [s].
+Finished Cycle no. = 9.0. Time elapsed = 520.78 [s]
+728000 time step(s) out of 16000000 completed(10th cardiac cycle 1/10). Time elapsed = 526.37 [s].
+736000 time step(s) out of 16000000 completed(10th cardiac cycle 2/10). Time elapsed = 531.97 [s].
+744000 time step(s) out of 16000000 completed(10th cardiac cycle 3/10). Time elapsed = 537.54 [s].
+752000 time step(s) out of 16000000 completed(10th cardiac cycle 4/10). Time elapsed = 543.12 [s].
+760000 time step(s) out of 16000000 completed(10th cardiac cycle 5/10). Time elapsed = 548.61 [s].
+768000 time step(s) out of 16000000 completed(10th cardiac cycle 6/10). Time elapsed = 554.13 [s].
+776000 time step(s) out of 16000000 completed(10th cardiac cycle 7/10). Time elapsed = 559.68 [s].
+784000 time step(s) out of 16000000 completed(10th cardiac cycle 8/10). Time elapsed = 565.24 [s].
+792000 time step(s) out of 16000000 completed(10th cardiac cycle 9/10). Time elapsed = 570.77 [s].
+800000 time step(s) out of 16000000 completed(10th cardiac cycle 10/10). Time elapsed = 576.34 [s].
+Finished Cycle no. = 10.0. Time elapsed = 576.34 [s]
+Checking convergence...
+Q not converged at every artery! Max rel_err_Qartery = 0.035847243721577965 at artery no. 15
+Parm(artery no. 17) not converged! rel_err_Parm = 0.19888613268194508
+Qoutmean_CoW not converged! Max rel_err_QCoWOut = 0.09602048453273695 at artery no. 65
+Everything hasn't converged! if_conv = 0.
+808000 time step(s) out of 16000000 completed(11th cardiac cycle 1/10). Time elapsed = 581.93 [s].
+816000 time step(s) out of 16000000 completed(11th cardiac cycle 2/10). Time elapsed = 587.53 [s].
+824000 time step(s) out of 16000000 completed(11th cardiac cycle 3/10). Time elapsed = 593.17 [s].
+832000 time step(s) out of 16000000 completed(11th cardiac cycle 4/10). Time elapsed = 598.73 [s].
+840000 time step(s) out of 16000000 completed(11th cardiac cycle 5/10). Time elapsed = 604.28 [s].
+848000 time step(s) out of 16000000 completed(11th cardiac cycle 6/10). Time elapsed = 609.84 [s].
+856000 time step(s) out of 16000000 completed(11th cardiac cycle 7/10). Time elapsed = 615.43 [s].
+864000 time step(s) out of 16000000 completed(11th cardiac cycle 8/10). Time elapsed = 620.91 [s].
+872000 time step(s) out of 16000000 completed(11th cardiac cycle 9/10). Time elapsed = 626.44 [s].
+880000 time step(s) out of 16000000 completed(11th cardiac cycle 10/10). Time elapsed = 632.02 [s].
+Finished Cycle no. = 11.0. Time elapsed = 632.02 [s]
+888000 time step(s) out of 16000000 completed(12th cardiac cycle 1/10). Time elapsed = 637.62 [s].
+896000 time step(s) out of 16000000 completed(12th cardiac cycle 2/10). Time elapsed = 643.17 [s].
+904000 time step(s) out of 16000000 completed(12th cardiac cycle 3/10). Time elapsed = 648.74 [s].
+912000 time step(s) out of 16000000 completed(12th cardiac cycle 4/10). Time elapsed = 654.28 [s].
+920000 time step(s) out of 16000000 completed(12th cardiac cycle 5/10). Time elapsed = 659.82 [s].
+928000 time step(s) out of 16000000 completed(12th cardiac cycle 6/10). Time elapsed = 665.29 [s].
+936000 time step(s) out of 16000000 completed(12th cardiac cycle 7/10). Time elapsed = 670.75 [s].
+944000 time step(s) out of 16000000 completed(12th cardiac cycle 8/10). Time elapsed = 676.23 [s].
+952000 time step(s) out of 16000000 completed(12th cardiac cycle 9/10). Time elapsed = 681.73 [s].
+960000 time step(s) out of 16000000 completed(12th cardiac cycle 10/10). Time elapsed = 687.24 [s].
+Finished Cycle no. = 12.0. Time elapsed = 687.24 [s]
+Checking convergence...
+Q not converged at every artery! Max rel_err_Qartery = 0.03145213887514295 at artery no. 57
+Parm(artery no. 17) not converged! rel_err_Parm = 0.15316078654558865
+Qoutmean_CoW not converged! Max rel_err_QCoWOut = 0.11203850056349907 at artery no. 65
+Everything hasn't converged! if_conv = 0.
+968000 time step(s) out of 16000000 completed(13th cardiac cycle 1/10). Time elapsed = 692.83 [s].
+976000 time step(s) out of 16000000 completed(13th cardiac cycle 2/10). Time elapsed = 698.40 [s].
+984000 time step(s) out of 16000000 completed(13th cardiac cycle 3/10). Time elapsed = 703.94 [s].
+992000 time step(s) out of 16000000 completed(13th cardiac cycle 4/10). Time elapsed = 709.51 [s].
+1000000 time step(s) out of 16000000 completed(13th cardiac cycle 5/10). Time elapsed = 714.98 [s].
+1008000 time step(s) out of 16000000 completed(13th cardiac cycle 6/10). Time elapsed = 720.39 [s].
+1016000 time step(s) out of 16000000 completed(13th cardiac cycle 7/10). Time elapsed = 725.85 [s].
+1024000 time step(s) out of 16000000 completed(13th cardiac cycle 8/10). Time elapsed = 731.28 [s].
+1032000 time step(s) out of 16000000 completed(13th cardiac cycle 9/10). Time elapsed = 736.73 [s].
+1040000 time step(s) out of 16000000 completed(13th cardiac cycle 10/10). Time elapsed = 742.20 [s].
+Finished Cycle no. = 13.0. Time elapsed = 742.20 [s]
+1048000 time step(s) out of 16000000 completed(14th cardiac cycle 1/10). Time elapsed = 747.68 [s].
+1056000 time step(s) out of 16000000 completed(14th cardiac cycle 2/10). Time elapsed = 753.15 [s].
+1064000 time step(s) out of 16000000 completed(14th cardiac cycle 3/10). Time elapsed = 758.60 [s].
+1072000 time step(s) out of 16000000 completed(14th cardiac cycle 4/10). Time elapsed = 764.11 [s].
+1080000 time step(s) out of 16000000 completed(14th cardiac cycle 5/10). Time elapsed = 769.65 [s].
+1088000 time step(s) out of 16000000 completed(14th cardiac cycle 6/10). Time elapsed = 775.09 [s].
+1096000 time step(s) out of 16000000 completed(14th cardiac cycle 7/10). Time elapsed = 780.65 [s].
+1104000 time step(s) out of 16000000 completed(14th cardiac cycle 8/10). Time elapsed = 786.10 [s].
+1112000 time step(s) out of 16000000 completed(14th cardiac cycle 9/10). Time elapsed = 791.57 [s].
+1120000 time step(s) out of 16000000 completed(14th cardiac cycle 10/10). Time elapsed = 797.96 [s].
+Finished Cycle no. = 14.0. Time elapsed = 797.96 [s]
+Checking convergence...
+Q not converged at every artery! Max rel_err_Qartery = 0.02855128260430555 at artery no. 57
+Parm(artery no. 17) not converged! rel_err_Parm = 0.10245458255187691
+Qoutmean_CoW not converged! Max rel_err_QCoWOut = 0.10658128428916239 at artery no. 65
+Everything hasn't converged! if_conv = 0.
+1128000 time step(s) out of 16000000 completed(15th cardiac cycle 1/10). Time elapsed = 804.00 [s].
+1136000 time step(s) out of 16000000 completed(15th cardiac cycle 2/10). Time elapsed = 809.79 [s].
+1144000 time step(s) out of 16000000 completed(15th cardiac cycle 3/10). Time elapsed = 815.44 [s].
+1152000 time step(s) out of 16000000 completed(15th cardiac cycle 4/10). Time elapsed = 821.22 [s].
+1160000 time step(s) out of 16000000 completed(15th cardiac cycle 5/10). Time elapsed = 826.77 [s].
+1168000 time step(s) out of 16000000 completed(15th cardiac cycle 6/10). Time elapsed = 832.20 [s].
+1176000 time step(s) out of 16000000 completed(15th cardiac cycle 7/10). Time elapsed = 837.61 [s].
+1184000 time step(s) out of 16000000 completed(15th cardiac cycle 8/10). Time elapsed = 843.08 [s].
+1192000 time step(s) out of 16000000 completed(15th cardiac cycle 9/10). Time elapsed = 848.55 [s].
+1200000 time step(s) out of 16000000 completed(15th cardiac cycle 10/10). Time elapsed = 854.02 [s].
+Finished Cycle no. = 15.0. Time elapsed = 854.02 [s]
+1208000 time step(s) out of 16000000 completed(16th cardiac cycle 1/10). Time elapsed = 859.59 [s].
+1216000 time step(s) out of 16000000 completed(16th cardiac cycle 2/10). Time elapsed = 865.05 [s].
+1224000 time step(s) out of 16000000 completed(16th cardiac cycle 3/10). Time elapsed = 870.46 [s].
+1232000 time step(s) out of 16000000 completed(16th cardiac cycle 4/10). Time elapsed = 875.89 [s].
+1240000 time step(s) out of 16000000 completed(16th cardiac cycle 5/10). Time elapsed = 881.32 [s].
+1248000 time step(s) out of 16000000 completed(16th cardiac cycle 6/10). Time elapsed = 886.84 [s].
+1256000 time step(s) out of 16000000 completed(16th cardiac cycle 7/10). Time elapsed = 892.44 [s].
+1264000 time step(s) out of 16000000 completed(16th cardiac cycle 8/10). Time elapsed = 897.86 [s].
+1272000 time step(s) out of 16000000 completed(16th cardiac cycle 9/10). Time elapsed = 903.33 [s].
+1280000 time step(s) out of 16000000 completed(16th cardiac cycle 10/10). Time elapsed = 908.75 [s].
+Finished Cycle no. = 16.0. Time elapsed = 908.75 [s]
+Checking convergence...
+Q not converged at every artery! Max rel_err_Qartery = 0.023059519592608425 at artery no. 57
+Parm(artery no. 17) not converged! rel_err_Parm = 0.05419337301965653
+Qoutmean_CoW not converged! Max rel_err_QCoWOut = 0.08846102772635471 at artery no. 61
+Everything hasn't converged! if_conv = 0.
+1288000 time step(s) out of 16000000 completed(17th cardiac cycle 1/10). Time elapsed = 914.20 [s].
+1296000 time step(s) out of 16000000 completed(17th cardiac cycle 2/10). Time elapsed = 919.66 [s].
+1304000 time step(s) out of 16000000 completed(17th cardiac cycle 3/10). Time elapsed = 925.12 [s].
+1312000 time step(s) out of 16000000 completed(17th cardiac cycle 4/10). Time elapsed = 930.54 [s].
+1320000 time step(s) out of 16000000 completed(17th cardiac cycle 5/10). Time elapsed = 935.91 [s].
+1328000 time step(s) out of 16000000 completed(17th cardiac cycle 6/10). Time elapsed = 941.34 [s].
+1336000 time step(s) out of 16000000 completed(17th cardiac cycle 7/10). Time elapsed = 946.76 [s].
+1344000 time step(s) out of 16000000 completed(17th cardiac cycle 8/10). Time elapsed = 952.24 [s].
+1352000 time step(s) out of 16000000 completed(17th cardiac cycle 9/10). Time elapsed = 957.65 [s].
+1360000 time step(s) out of 16000000 completed(17th cardiac cycle 10/10). Time elapsed = 963.07 [s].
+Finished Cycle no. = 17.0. Time elapsed = 963.07 [s]
+1368000 time step(s) out of 16000000 completed(18th cardiac cycle 1/10). Time elapsed = 968.54 [s].
+1376000 time step(s) out of 16000000 completed(18th cardiac cycle 2/10). Time elapsed = 974.02 [s].
+1384000 time step(s) out of 16000000 completed(18th cardiac cycle 3/10). Time elapsed = 979.42 [s].
+1392000 time step(s) out of 16000000 completed(18th cardiac cycle 4/10). Time elapsed = 984.83 [s].
+1400000 time step(s) out of 16000000 completed(18th cardiac cycle 5/10). Time elapsed = 990.23 [s].
+1408000 time step(s) out of 16000000 completed(18th cardiac cycle 6/10). Time elapsed = 995.60 [s].
+1416000 time step(s) out of 16000000 completed(18th cardiac cycle 7/10). Time elapsed = 1001.04 [s].
+1424000 time step(s) out of 16000000 completed(18th cardiac cycle 8/10). Time elapsed = 1006.51 [s].
+1432000 time step(s) out of 16000000 completed(18th cardiac cycle 9/10). Time elapsed = 1011.93 [s].
+1440000 time step(s) out of 16000000 completed(18th cardiac cycle 10/10). Time elapsed = 1017.45 [s].
+Finished Cycle no. = 18.0. Time elapsed = 1017.45 [s]
+Checking convergence...
+Q not converged at every artery! Max rel_err_Qartery = 0.016114759610803654 at artery no. 57
+Parm(artery no. 17) not converged! rel_err_Parm = 0.013816479085710296
+Qoutmean_CoW not converged! Max rel_err_QCoWOut = 0.06543456129949951 at artery no. 61
+Everything hasn't converged! if_conv = 0.
+1448000 time step(s) out of 16000000 completed(19th cardiac cycle 1/10). Time elapsed = 1022.97 [s].
+1456000 time step(s) out of 16000000 completed(19th cardiac cycle 2/10). Time elapsed = 1028.48 [s].
+1464000 time step(s) out of 16000000 completed(19th cardiac cycle 3/10). Time elapsed = 1033.92 [s].
+1472000 time step(s) out of 16000000 completed(19th cardiac cycle 4/10). Time elapsed = 1039.33 [s].
+1480000 time step(s) out of 16000000 completed(19th cardiac cycle 5/10). Time elapsed = 1044.70 [s].
+1488000 time step(s) out of 16000000 completed(19th cardiac cycle 6/10). Time elapsed = 1050.01 [s].
+1496000 time step(s) out of 16000000 completed(19th cardiac cycle 7/10). Time elapsed = 1055.36 [s].
+1504000 time step(s) out of 16000000 completed(19th cardiac cycle 8/10). Time elapsed = 1060.72 [s].
+1512000 time step(s) out of 16000000 completed(19th cardiac cycle 9/10). Time elapsed = 1066.15 [s].
+1520000 time step(s) out of 16000000 completed(19th cardiac cycle 10/10). Time elapsed = 1071.55 [s].
+Finished Cycle no. = 19.0. Time elapsed = 1071.55 [s]
+1528000 time step(s) out of 16000000 completed(20th cardiac cycle 1/10). Time elapsed = 1076.97 [s].
+1536000 time step(s) out of 16000000 completed(20th cardiac cycle 2/10). Time elapsed = 1082.37 [s].
+1544000 time step(s) out of 16000000 completed(20th cardiac cycle 3/10). Time elapsed = 1087.79 [s].
+1552000 time step(s) out of 16000000 completed(20th cardiac cycle 4/10). Time elapsed = 1093.18 [s].
+1560000 time step(s) out of 16000000 completed(20th cardiac cycle 5/10). Time elapsed = 1098.56 [s].
+1568000 time step(s) out of 16000000 completed(20th cardiac cycle 6/10). Time elapsed = 1103.91 [s].
+1576000 time step(s) out of 16000000 completed(20th cardiac cycle 7/10). Time elapsed = 1109.34 [s].
+1584000 time step(s) out of 16000000 completed(20th cardiac cycle 8/10). Time elapsed = 1114.70 [s].
+1592000 time step(s) out of 16000000 completed(20th cardiac cycle 9/10). Time elapsed = 1120.11 [s].
+1600000 time step(s) out of 16000000 completed(20th cardiac cycle 10/10). Time elapsed = 1125.57 [s].
+Finished Cycle no. = 20.0. Time elapsed = 1125.57 [s]
+Checking convergence...
+Q not converged at every artery! Max rel_err_Qartery = 0.01513630254483196 at artery no. 59
+Parm(artery no. 17) not converged! rel_err_Parm = 0.015216418726643128
+Qoutmean_CoW not converged! Max rel_err_QCoWOut = 0.04034243961298141 at artery no. 61
+Everything hasn't converged! if_conv = 0.
+1608000 time step(s) out of 16000000 completed(21th cardiac cycle 1/10). Time elapsed = 1131.46 [s].
+1616000 time step(s) out of 16000000 completed(21th cardiac cycle 2/10). Time elapsed = 1136.87 [s].
+1624000 time step(s) out of 16000000 completed(21th cardiac cycle 3/10). Time elapsed = 1142.36 [s].
+1632000 time step(s) out of 16000000 completed(21th cardiac cycle 4/10). Time elapsed = 1147.78 [s].
+1640000 time step(s) out of 16000000 completed(21th cardiac cycle 5/10). Time elapsed = 1153.18 [s].
+1648000 time step(s) out of 16000000 completed(21th cardiac cycle 6/10). Time elapsed = 1158.59 [s].
+1656000 time step(s) out of 16000000 completed(21th cardiac cycle 7/10). Time elapsed = 1163.97 [s].
+1664000 time step(s) out of 16000000 completed(21th cardiac cycle 8/10). Time elapsed = 1169.37 [s].
+1672000 time step(s) out of 16000000 completed(21th cardiac cycle 9/10). Time elapsed = 1174.79 [s].
+1680000 time step(s) out of 16000000 completed(21th cardiac cycle 10/10). Time elapsed = 1180.16 [s].
+Finished Cycle no. = 21.0. Time elapsed = 1180.16 [s]
+1688000 time step(s) out of 16000000 completed(22th cardiac cycle 1/10). Time elapsed = 1185.62 [s].
+1696000 time step(s) out of 16000000 completed(22th cardiac cycle 2/10). Time elapsed = 1191.10 [s].
+1704000 time step(s) out of 16000000 completed(22th cardiac cycle 3/10). Time elapsed = 1196.58 [s].
+1712000 time step(s) out of 16000000 completed(22th cardiac cycle 4/10). Time elapsed = 1202.07 [s].
+1720000 time step(s) out of 16000000 completed(22th cardiac cycle 5/10). Time elapsed = 1207.50 [s].
+1728000 time step(s) out of 16000000 completed(22th cardiac cycle 6/10). Time elapsed = 1212.97 [s].
+1736000 time step(s) out of 16000000 completed(22th cardiac cycle 7/10). Time elapsed = 1218.43 [s].
+1744000 time step(s) out of 16000000 completed(22th cardiac cycle 8/10). Time elapsed = 1223.78 [s].
+1752000 time step(s) out of 16000000 completed(22th cardiac cycle 9/10). Time elapsed = 1229.16 [s].
+1760000 time step(s) out of 16000000 completed(22th cardiac cycle 10/10). Time elapsed = 1234.49 [s].
+Finished Cycle no. = 22.0. Time elapsed = 1234.49 [s]
+Checking convergence...
+Q not converged at every artery! Max rel_err_Qartery = 0.014491299342384559 at artery no. 59
+Parm(artery no. 17) not converged! rel_err_Parm = 0.031623424006944845
+Qoutmean_CoW not converged! Max rel_err_QCoWOut = 0.017388491494373725 at artery no. 61
+Everything hasn't converged! if_conv = 0.
+1768000 time step(s) out of 16000000 completed(23th cardiac cycle 1/10). Time elapsed = 1239.89 [s].
+1776000 time step(s) out of 16000000 completed(23th cardiac cycle 2/10). Time elapsed = 1245.27 [s].
+1784000 time step(s) out of 16000000 completed(23th cardiac cycle 3/10). Time elapsed = 1250.64 [s].
+1792000 time step(s) out of 16000000 completed(23th cardiac cycle 4/10). Time elapsed = 1256.01 [s].
+1800000 time step(s) out of 16000000 completed(23th cardiac cycle 5/10). Time elapsed = 1261.41 [s].
+1808000 time step(s) out of 16000000 completed(23th cardiac cycle 6/10). Time elapsed = 1266.76 [s].
+1816000 time step(s) out of 16000000 completed(23th cardiac cycle 7/10). Time elapsed = 1272.13 [s].
+1824000 time step(s) out of 16000000 completed(23th cardiac cycle 8/10). Time elapsed = 1277.66 [s].
+1832000 time step(s) out of 16000000 completed(23th cardiac cycle 9/10). Time elapsed = 1283.10 [s].
+1840000 time step(s) out of 16000000 completed(23th cardiac cycle 10/10). Time elapsed = 1288.65 [s].
+Finished Cycle no. = 23.0. Time elapsed = 1288.65 [s]
+1848000 time step(s) out of 16000000 completed(24th cardiac cycle 1/10). Time elapsed = 1294.08 [s].
+1856000 time step(s) out of 16000000 completed(24th cardiac cycle 2/10). Time elapsed = 1299.48 [s].
+1864000 time step(s) out of 16000000 completed(24th cardiac cycle 3/10). Time elapsed = 1305.17 [s].
+1872000 time step(s) out of 16000000 completed(24th cardiac cycle 4/10). Time elapsed = 1310.83 [s].
+1880000 time step(s) out of 16000000 completed(24th cardiac cycle 5/10). Time elapsed = 1316.89 [s].
+1888000 time step(s) out of 16000000 completed(24th cardiac cycle 6/10). Time elapsed = 1323.03 [s].
+1896000 time step(s) out of 16000000 completed(24th cardiac cycle 7/10). Time elapsed = 1328.76 [s].
+1904000 time step(s) out of 16000000 completed(24th cardiac cycle 8/10). Time elapsed = 1334.30 [s].
+1912000 time step(s) out of 16000000 completed(24th cardiac cycle 9/10). Time elapsed = 1339.80 [s].
+1920000 time step(s) out of 16000000 completed(24th cardiac cycle 10/10). Time elapsed = 1345.25 [s].
+Finished Cycle no. = 24.0. Time elapsed = 1345.25 [s]
+Checking convergence...
+Q not converged at every artery! Max rel_err_Qartery = 0.011161057789795224 at artery no. 59
+Parm(artery no. 17) not converged! rel_err_Parm = 0.03635471065309418
+Qoutmean_CoW not converged! Max rel_err_QCoWOut = 0.00794545557361986 at artery no. 65
+Everything hasn't converged! if_conv = 0.
+1928000 time step(s) out of 16000000 completed(25th cardiac cycle 1/10). Time elapsed = 1350.75 [s].
+1936000 time step(s) out of 16000000 completed(25th cardiac cycle 2/10). Time elapsed = 1356.26 [s].
+1944000 time step(s) out of 16000000 completed(25th cardiac cycle 3/10). Time elapsed = 1361.72 [s].
+1952000 time step(s) out of 16000000 completed(25th cardiac cycle 4/10). Time elapsed = 1367.30 [s].
+1960000 time step(s) out of 16000000 completed(25th cardiac cycle 5/10). Time elapsed = 1373.16 [s].
+1968000 time step(s) out of 16000000 completed(25th cardiac cycle 6/10). Time elapsed = 1379.14 [s].
+1976000 time step(s) out of 16000000 completed(25th cardiac cycle 7/10). Time elapsed = 1384.93 [s].
+1984000 time step(s) out of 16000000 completed(25th cardiac cycle 8/10). Time elapsed = 1390.30 [s].
+1992000 time step(s) out of 16000000 completed(25th cardiac cycle 9/10). Time elapsed = 1395.85 [s].
+2000000 time step(s) out of 16000000 completed(25th cardiac cycle 10/10). Time elapsed = 1401.29 [s].
+Finished Cycle no. = 25.0. Time elapsed = 1401.29 [s]
+2008000 time step(s) out of 16000000 completed(26th cardiac cycle 1/10). Time elapsed = 1406.73 [s].
+2016000 time step(s) out of 16000000 completed(26th cardiac cycle 2/10). Time elapsed = 1412.13 [s].
+2024000 time step(s) out of 16000000 completed(26th cardiac cycle 3/10). Time elapsed = 1417.75 [s].
+2032000 time step(s) out of 16000000 completed(26th cardiac cycle 4/10). Time elapsed = 1423.16 [s].
+2040000 time step(s) out of 16000000 completed(26th cardiac cycle 5/10). Time elapsed = 1428.62 [s].
+2048000 time step(s) out of 16000000 completed(26th cardiac cycle 6/10). Time elapsed = 1434.11 [s].
+2056000 time step(s) out of 16000000 completed(26th cardiac cycle 7/10). Time elapsed = 1440.02 [s].
+2064000 time step(s) out of 16000000 completed(26th cardiac cycle 8/10). Time elapsed = 1445.99 [s].
+2072000 time step(s) out of 16000000 completed(26th cardiac cycle 9/10). Time elapsed = 1451.58 [s].
+2080000 time step(s) out of 16000000 completed(26th cardiac cycle 10/10). Time elapsed = 1457.08 [s].
+Finished Cycle no. = 26.0. Time elapsed = 1457.08 [s]
+Checking convergence...
+Q not converged at every artery! Max rel_err_Qartery = 0.009169060419939437 at artery no. 64
+Parm(artery no. 17) not converged! rel_err_Parm = 0.0322165736728535
+Qoutmean_CoW not converged! Max rel_err_QCoWOut = 0.017966080750236882 at artery no. 65
+Everything hasn't converged! if_conv = 0.
+2088000 time step(s) out of 16000000 completed(27th cardiac cycle 1/10). Time elapsed = 1462.63 [s].
+2096000 time step(s) out of 16000000 completed(27th cardiac cycle 2/10). Time elapsed = 1468.09 [s].
+2104000 time step(s) out of 16000000 completed(27th cardiac cycle 3/10). Time elapsed = 1473.55 [s].
+2112000 time step(s) out of 16000000 completed(27th cardiac cycle 4/10). Time elapsed = 1479.11 [s].
+2120000 time step(s) out of 16000000 completed(27th cardiac cycle 5/10). Time elapsed = 1484.65 [s].
+2128000 time step(s) out of 16000000 completed(27th cardiac cycle 6/10). Time elapsed = 1490.40 [s].
+2136000 time step(s) out of 16000000 completed(27th cardiac cycle 7/10). Time elapsed = 1495.85 [s].
+2144000 time step(s) out of 16000000 completed(27th cardiac cycle 8/10). Time elapsed = 1501.23 [s].
+2152000 time step(s) out of 16000000 completed(27th cardiac cycle 9/10). Time elapsed = 1506.59 [s].
+2160000 time step(s) out of 16000000 completed(27th cardiac cycle 10/10). Time elapsed = 1511.98 [s].
+Finished Cycle no. = 27.0. Time elapsed = 1511.98 [s]
+2168000 time step(s) out of 16000000 completed(28th cardiac cycle 1/10). Time elapsed = 1517.41 [s].
+2176000 time step(s) out of 16000000 completed(28th cardiac cycle 2/10). Time elapsed = 1522.78 [s].
+2184000 time step(s) out of 16000000 completed(28th cardiac cycle 3/10). Time elapsed = 1528.14 [s].
+2192000 time step(s) out of 16000000 completed(28th cardiac cycle 4/10). Time elapsed = 1533.49 [s].
+2200000 time step(s) out of 16000000 completed(28th cardiac cycle 5/10). Time elapsed = 1538.84 [s].
+2208000 time step(s) out of 16000000 completed(28th cardiac cycle 6/10). Time elapsed = 1544.23 [s].
+2216000 time step(s) out of 16000000 completed(28th cardiac cycle 7/10). Time elapsed = 1549.68 [s].
+2224000 time step(s) out of 16000000 completed(28th cardiac cycle 8/10). Time elapsed = 1555.16 [s].
+2232000 time step(s) out of 16000000 completed(28th cardiac cycle 9/10). Time elapsed = 1560.64 [s].
+2240000 time step(s) out of 16000000 completed(28th cardiac cycle 10/10). Time elapsed = 1566.30 [s].
+Finished Cycle no. = 28.0. Time elapsed = 1566.30 [s]
+Checking convergence...
+Q not converged at every artery! Max rel_err_Qartery = 0.007396062221514572 at artery no. 64
+Parm(artery no. 17) not converged! rel_err_Parm = 0.022991335441123466
+Qoutmean_CoW not converged! Max rel_err_QCoWOut = 0.020710862199211845 at artery no. 65
+Everything hasn't converged! if_conv = 0.
+2248000 time step(s) out of 16000000 completed(29th cardiac cycle 1/10). Time elapsed = 1572.22 [s].
+2256000 time step(s) out of 16000000 completed(29th cardiac cycle 2/10). Time elapsed = 1577.72 [s].
+2264000 time step(s) out of 16000000 completed(29th cardiac cycle 3/10). Time elapsed = 1583.22 [s].
+2272000 time step(s) out of 16000000 completed(29th cardiac cycle 4/10). Time elapsed = 1588.65 [s].
+2280000 time step(s) out of 16000000 completed(29th cardiac cycle 5/10). Time elapsed = 1594.15 [s].
+2288000 time step(s) out of 16000000 completed(29th cardiac cycle 6/10). Time elapsed = 1599.59 [s].
+2296000 time step(s) out of 16000000 completed(29th cardiac cycle 7/10). Time elapsed = 1605.02 [s].
+2304000 time step(s) out of 16000000 completed(29th cardiac cycle 8/10). Time elapsed = 1610.41 [s].
+2312000 time step(s) out of 16000000 completed(29th cardiac cycle 9/10). Time elapsed = 1615.79 [s].
+2320000 time step(s) out of 16000000 completed(29th cardiac cycle 10/10). Time elapsed = 1621.18 [s].
+Finished Cycle no. = 29.0. Time elapsed = 1621.18 [s]
+2328000 time step(s) out of 16000000 completed(30th cardiac cycle 1/10). Time elapsed = 1626.56 [s].
+2336000 time step(s) out of 16000000 completed(30th cardiac cycle 2/10). Time elapsed = 1631.98 [s].
+2344000 time step(s) out of 16000000 completed(30th cardiac cycle 3/10). Time elapsed = 1637.73 [s].
+2352000 time step(s) out of 16000000 completed(30th cardiac cycle 4/10). Time elapsed = 1643.28 [s].
+2360000 time step(s) out of 16000000 completed(30th cardiac cycle 5/10). Time elapsed = 1648.62 [s].
+2368000 time step(s) out of 16000000 completed(30th cardiac cycle 6/10). Time elapsed = 1654.00 [s].
+2376000 time step(s) out of 16000000 completed(30th cardiac cycle 7/10). Time elapsed = 1659.43 [s].
+2384000 time step(s) out of 16000000 completed(30th cardiac cycle 8/10). Time elapsed = 1664.91 [s].
+2392000 time step(s) out of 16000000 completed(30th cardiac cycle 9/10). Time elapsed = 1670.36 [s].
+2400000 time step(s) out of 16000000 completed(30th cardiac cycle 10/10). Time elapsed = 1675.76 [s].
+Finished Cycle no. = 30.0. Time elapsed = 1675.76 [s]
+Checking convergence...
+Q not converged at every artery! Max rel_err_Qartery = 0.005742813637307344 at artery no. 57
+Parm(artery no. 17) not converged! rel_err_Parm = 0.012350397381002663
+Qoutmean_CoW not converged! Max rel_err_QCoWOut = 0.018079853661613958 at artery no. 65
+Everything hasn't converged! if_conv = 0.
+2408000 time step(s) out of 16000000 completed(31th cardiac cycle 1/10). Time elapsed = 1681.26 [s].
+2416000 time step(s) out of 16000000 completed(31th cardiac cycle 2/10). Time elapsed = 1686.76 [s].
+2424000 time step(s) out of 16000000 completed(31th cardiac cycle 3/10). Time elapsed = 1692.23 [s].
+2432000 time step(s) out of 16000000 completed(31th cardiac cycle 4/10). Time elapsed = 1697.70 [s].
+2440000 time step(s) out of 16000000 completed(31th cardiac cycle 5/10). Time elapsed = 1703.11 [s].
+2448000 time step(s) out of 16000000 completed(31th cardiac cycle 6/10). Time elapsed = 1708.50 [s].
+2456000 time step(s) out of 16000000 completed(31th cardiac cycle 7/10). Time elapsed = 1713.93 [s].
+2464000 time step(s) out of 16000000 completed(31th cardiac cycle 8/10). Time elapsed = 1719.29 [s].
+2472000 time step(s) out of 16000000 completed(31th cardiac cycle 9/10). Time elapsed = 1724.76 [s].
+2480000 time step(s) out of 16000000 completed(31th cardiac cycle 10/10). Time elapsed = 1730.13 [s].
+Finished Cycle no. = 31.0. Time elapsed = 1730.13 [s]
+2488000 time step(s) out of 16000000 completed(32th cardiac cycle 1/10). Time elapsed = 1735.58 [s].
+2496000 time step(s) out of 16000000 completed(32th cardiac cycle 2/10). Time elapsed = 1741.08 [s].
+2504000 time step(s) out of 16000000 completed(32th cardiac cycle 3/10). Time elapsed = 1746.53 [s].
+2512000 time step(s) out of 16000000 completed(32th cardiac cycle 4/10). Time elapsed = 1751.98 [s].
+2520000 time step(s) out of 16000000 completed(32th cardiac cycle 5/10). Time elapsed = 1757.37 [s].
+2528000 time step(s) out of 16000000 completed(32th cardiac cycle 6/10). Time elapsed = 1762.69 [s].
+2536000 time step(s) out of 16000000 completed(32th cardiac cycle 7/10). Time elapsed = 1768.00 [s].
+2544000 time step(s) out of 16000000 completed(32th cardiac cycle 8/10). Time elapsed = 1773.36 [s].
+2552000 time step(s) out of 16000000 completed(32th cardiac cycle 9/10). Time elapsed = 1778.78 [s].
+2560000 time step(s) out of 16000000 completed(32th cardiac cycle 10/10). Time elapsed = 1784.18 [s].
+Finished Cycle no. = 32.0. Time elapsed = 1784.18 [s]
+Checking convergence...
+Q not converged at every artery! Max rel_err_Qartery = 0.0038630104099647493 at artery no. 57
+Parm(artery no. 17) not converged! rel_err_Parm = 0.0030162196951870612
+Qoutmean_CoW not converged! Max rel_err_QCoWOut = 0.013148866840680158 at artery no. 61
+Everything hasn't converged! if_conv = 0.
+2568000 time step(s) out of 16000000 completed(33th cardiac cycle 1/10). Time elapsed = 1789.66 [s].
+2576000 time step(s) out of 16000000 completed(33th cardiac cycle 2/10). Time elapsed = 1795.07 [s].
+2584000 time step(s) out of 16000000 completed(33th cardiac cycle 3/10). Time elapsed = 1800.56 [s].
+2592000 time step(s) out of 16000000 completed(33th cardiac cycle 4/10). Time elapsed = 1806.03 [s].
+2600000 time step(s) out of 16000000 completed(33th cardiac cycle 5/10). Time elapsed = 1811.41 [s].
+2608000 time step(s) out of 16000000 completed(33th cardiac cycle 6/10). Time elapsed = 1816.90 [s].
+2616000 time step(s) out of 16000000 completed(33th cardiac cycle 7/10). Time elapsed = 1822.28 [s].
+2624000 time step(s) out of 16000000 completed(33th cardiac cycle 8/10). Time elapsed = 1827.66 [s].
+2632000 time step(s) out of 16000000 completed(33th cardiac cycle 9/10). Time elapsed = 1833.17 [s].
+2640000 time step(s) out of 16000000 completed(33th cardiac cycle 10/10). Time elapsed = 1838.70 [s].
+Finished Cycle no. = 33.0. Time elapsed = 1838.70 [s]
+2648000 time step(s) out of 16000000 completed(34th cardiac cycle 1/10). Time elapsed = 1844.29 [s].
+2656000 time step(s) out of 16000000 completed(34th cardiac cycle 2/10). Time elapsed = 1849.72 [s].
+2664000 time step(s) out of 16000000 completed(34th cardiac cycle 3/10). Time elapsed = 1855.17 [s].
+2672000 time step(s) out of 16000000 completed(34th cardiac cycle 4/10). Time elapsed = 1860.68 [s].
+2680000 time step(s) out of 16000000 completed(34th cardiac cycle 5/10). Time elapsed = 1866.09 [s].
+2688000 time step(s) out of 16000000 completed(34th cardiac cycle 6/10). Time elapsed = 1871.45 [s].
+2696000 time step(s) out of 16000000 completed(34th cardiac cycle 7/10). Time elapsed = 1876.92 [s].
+2704000 time step(s) out of 16000000 completed(34th cardiac cycle 8/10). Time elapsed = 1882.34 [s].
+2712000 time step(s) out of 16000000 completed(34th cardiac cycle 9/10). Time elapsed = 1887.73 [s].
+2720000 time step(s) out of 16000000 completed(34th cardiac cycle 10/10). Time elapsed = 1893.19 [s].
+Finished Cycle no. = 34.0. Time elapsed = 1893.19 [s]
+Checking convergence...
+Q not converged at every artery! Max rel_err_Qartery = 0.0038328538550828463 at artery no. 59
+Parm(artery no. 17) not converged! rel_err_Parm = 0.003559595701073321
+Qoutmean_CoW not converged! Max rel_err_QCoWOut = 0.008128205937903869 at artery no. 61
+Everything hasn't converged! if_conv = 0.
+2728000 time step(s) out of 16000000 completed(35th cardiac cycle 1/10). Time elapsed = 1898.59 [s].
+2736000 time step(s) out of 16000000 completed(35th cardiac cycle 2/10). Time elapsed = 1903.99 [s].
+2744000 time step(s) out of 16000000 completed(35th cardiac cycle 3/10). Time elapsed = 1909.42 [s].
+2752000 time step(s) out of 16000000 completed(35th cardiac cycle 4/10). Time elapsed = 1914.89 [s].
+2760000 time step(s) out of 16000000 completed(35th cardiac cycle 5/10). Time elapsed = 1920.31 [s].
+2768000 time step(s) out of 16000000 completed(35th cardiac cycle 6/10). Time elapsed = 1925.74 [s].
+2776000 time step(s) out of 16000000 completed(35th cardiac cycle 7/10). Time elapsed = 1931.10 [s].
+2784000 time step(s) out of 16000000 completed(35th cardiac cycle 8/10). Time elapsed = 1936.52 [s].
+2792000 time step(s) out of 16000000 completed(35th cardiac cycle 9/10). Time elapsed = 1941.98 [s].
+2800000 time step(s) out of 16000000 completed(35th cardiac cycle 10/10). Time elapsed = 1947.41 [s].
+Finished Cycle no. = 35.0. Time elapsed = 1947.41 [s]
+2808000 time step(s) out of 16000000 completed(36th cardiac cycle 1/10). Time elapsed = 1952.85 [s].
+2816000 time step(s) out of 16000000 completed(36th cardiac cycle 2/10). Time elapsed = 1958.23 [s].
+2824000 time step(s) out of 16000000 completed(36th cardiac cycle 3/10). Time elapsed = 1963.72 [s].
+2832000 time step(s) out of 16000000 completed(36th cardiac cycle 4/10). Time elapsed = 1969.15 [s].
+2840000 time step(s) out of 16000000 completed(36th cardiac cycle 5/10). Time elapsed = 1974.63 [s].
+2848000 time step(s) out of 16000000 completed(36th cardiac cycle 6/10). Time elapsed = 1980.06 [s].
+2856000 time step(s) out of 16000000 completed(36th cardiac cycle 7/10). Time elapsed = 1985.43 [s].
+2864000 time step(s) out of 16000000 completed(36th cardiac cycle 8/10). Time elapsed = 1990.84 [s].
+2872000 time step(s) out of 16000000 completed(36th cardiac cycle 9/10). Time elapsed = 1996.30 [s].
+2880000 time step(s) out of 16000000 completed(36th cardiac cycle 10/10). Time elapsed = 2001.68 [s].
+Finished Cycle no. = 36.0. Time elapsed = 2001.68 [s]
+Checking convergence...
+Q not converged at every artery! Max rel_err_Qartery = 0.003205032176997923 at artery no. 59
+Parm(artery no. 17) not converged! rel_err_Parm = 0.007055983417287034
+Qoutmean_CoW not converged! Max rel_err_QCoWOut = 0.0032844048141861364 at artery no. 61
+Everything hasn't converged! if_conv = 0.
+2888000 time step(s) out of 16000000 completed(37th cardiac cycle 1/10). Time elapsed = 2007.06 [s].
+2896000 time step(s) out of 16000000 completed(37th cardiac cycle 2/10). Time elapsed = 2012.42 [s].
+2904000 time step(s) out of 16000000 completed(37th cardiac cycle 3/10). Time elapsed = 2017.87 [s].
+2912000 time step(s) out of 16000000 completed(37th cardiac cycle 4/10). Time elapsed = 2023.39 [s].
+2920000 time step(s) out of 16000000 completed(37th cardiac cycle 5/10). Time elapsed = 2028.81 [s].
+2928000 time step(s) out of 16000000 completed(37th cardiac cycle 6/10). Time elapsed = 2034.17 [s].
+2936000 time step(s) out of 16000000 completed(37th cardiac cycle 7/10). Time elapsed = 2039.58 [s].
+2944000 time step(s) out of 16000000 completed(37th cardiac cycle 8/10). Time elapsed = 2045.00 [s].
+2952000 time step(s) out of 16000000 completed(37th cardiac cycle 9/10). Time elapsed = 2050.44 [s].
+2960000 time step(s) out of 16000000 completed(37th cardiac cycle 10/10). Time elapsed = 2055.86 [s].
+Finished Cycle no. = 37.0. Time elapsed = 2055.86 [s]
+2968000 time step(s) out of 16000000 completed(38th cardiac cycle 1/10). Time elapsed = 2061.46 [s].
+2976000 time step(s) out of 16000000 completed(38th cardiac cycle 2/10). Time elapsed = 2066.91 [s].
+2984000 time step(s) out of 16000000 completed(38th cardiac cycle 3/10). Time elapsed = 2072.33 [s].
+2992000 time step(s) out of 16000000 completed(38th cardiac cycle 4/10). Time elapsed = 2077.78 [s].
+3000000 time step(s) out of 16000000 completed(38th cardiac cycle 5/10). Time elapsed = 2083.25 [s].
+3008000 time step(s) out of 16000000 completed(38th cardiac cycle 6/10). Time elapsed = 2088.61 [s].
+3016000 time step(s) out of 16000000 completed(38th cardiac cycle 7/10). Time elapsed = 2094.04 [s].
+3024000 time step(s) out of 16000000 completed(38th cardiac cycle 8/10). Time elapsed = 2099.69 [s].
+3032000 time step(s) out of 16000000 completed(38th cardiac cycle 9/10). Time elapsed = 2105.15 [s].
+3040000 time step(s) out of 16000000 completed(38th cardiac cycle 10/10). Time elapsed = 2110.56 [s].
+Finished Cycle no. = 38.0. Time elapsed = 2110.56 [s]
+Checking convergence...
+Q not converged at every artery! Max rel_err_Qartery = 0.0021879921798560824 at artery no. 59
+Parm(artery no. 17) not converged! rel_err_Parm = 0.007909203144375201
+Qoutmean_CoW not converged! Max rel_err_QCoWOut = 0.0021629091013864745 at artery no. 65
+Everything hasn't converged! if_conv = 0.
+3048000 time step(s) out of 16000000 completed(39th cardiac cycle 1/10). Time elapsed = 2116.07 [s].
+3056000 time step(s) out of 16000000 completed(39th cardiac cycle 2/10). Time elapsed = 2121.48 [s].
+3064000 time step(s) out of 16000000 completed(39th cardiac cycle 3/10). Time elapsed = 2126.95 [s].
+3072000 time step(s) out of 16000000 completed(39th cardiac cycle 4/10). Time elapsed = 2132.38 [s].
+3080000 time step(s) out of 16000000 completed(39th cardiac cycle 5/10). Time elapsed = 2137.82 [s].
+3088000 time step(s) out of 16000000 completed(39th cardiac cycle 6/10). Time elapsed = 2143.32 [s].
+3096000 time step(s) out of 16000000 completed(39th cardiac cycle 7/10). Time elapsed = 2148.79 [s].
+3104000 time step(s) out of 16000000 completed(39th cardiac cycle 8/10). Time elapsed = 2154.23 [s].
+3112000 time step(s) out of 16000000 completed(39th cardiac cycle 9/10). Time elapsed = 2159.76 [s].
+3120000 time step(s) out of 16000000 completed(39th cardiac cycle 10/10). Time elapsed = 2165.21 [s].
+Finished Cycle no. = 39.0. Time elapsed = 2165.21 [s]
+3128000 time step(s) out of 16000000 completed(40th cardiac cycle 1/10). Time elapsed = 2170.76 [s].
+3136000 time step(s) out of 16000000 completed(40th cardiac cycle 2/10). Time elapsed = 2176.38 [s].
+3144000 time step(s) out of 16000000 completed(40th cardiac cycle 3/10). Time elapsed = 2181.93 [s].
+3152000 time step(s) out of 16000000 completed(40th cardiac cycle 4/10). Time elapsed = 2187.42 [s].
+3160000 time step(s) out of 16000000 completed(40th cardiac cycle 5/10). Time elapsed = 2193.14 [s].
+3168000 time step(s) out of 16000000 completed(40th cardiac cycle 6/10). Time elapsed = 2199.02 [s].
+3176000 time step(s) out of 16000000 completed(40th cardiac cycle 7/10). Time elapsed = 2205.03 [s].
+3184000 time step(s) out of 16000000 completed(40th cardiac cycle 8/10). Time elapsed = 2210.85 [s].
+3192000 time step(s) out of 16000000 completed(40th cardiac cycle 9/10). Time elapsed = 2216.43 [s].
+3200000 time step(s) out of 16000000 completed(40th cardiac cycle 10/10). Time elapsed = 2221.84 [s].
+Finished Cycle no. = 40.0. Time elapsed = 2221.84 [s]
+Checking convergence...
+Q not converged at every artery! Max rel_err_Qartery = 0.0018393052059849499 at artery no. 64
+Parm(artery no. 17) not converged! rel_err_Parm = 0.006920704068472386
+Qoutmean_CoW not converged! Max rel_err_QCoWOut = 0.0040097950037144715 at artery no. 65
+Everything hasn't converged! if_conv = 0.
+3208000 time step(s) out of 16000000 completed(41th cardiac cycle 1/10). Time elapsed = 2227.33 [s].
+3216000 time step(s) out of 16000000 completed(41th cardiac cycle 2/10). Time elapsed = 2232.85 [s].
+3224000 time step(s) out of 16000000 completed(41th cardiac cycle 3/10). Time elapsed = 2238.37 [s].
+3232000 time step(s) out of 16000000 completed(41th cardiac cycle 4/10). Time elapsed = 2244.22 [s].
+3240000 time step(s) out of 16000000 completed(41th cardiac cycle 5/10). Time elapsed = 2250.31 [s].
+3248000 time step(s) out of 16000000 completed(41th cardiac cycle 6/10). Time elapsed = 2256.00 [s].
+3256000 time step(s) out of 16000000 completed(41th cardiac cycle 7/10). Time elapsed = 2261.75 [s].
+3264000 time step(s) out of 16000000 completed(41th cardiac cycle 8/10). Time elapsed = 2267.27 [s].
+3272000 time step(s) out of 16000000 completed(41th cardiac cycle 9/10). Time elapsed = 2273.16 [s].
+3280000 time step(s) out of 16000000 completed(41th cardiac cycle 10/10). Time elapsed = 2279.34 [s].
+Finished Cycle no. = 41.0. Time elapsed = 2279.34 [s]
+3288000 time step(s) out of 16000000 completed(42th cardiac cycle 1/10). Time elapsed = 2285.04 [s].
+3296000 time step(s) out of 16000000 completed(42th cardiac cycle 2/10). Time elapsed = 2290.91 [s].
+3304000 time step(s) out of 16000000 completed(42th cardiac cycle 3/10). Time elapsed = 2297.10 [s].
+3312000 time step(s) out of 16000000 completed(42th cardiac cycle 4/10). Time elapsed = 2303.20 [s].
+3320000 time step(s) out of 16000000 completed(42th cardiac cycle 5/10). Time elapsed = 2308.95 [s].
+3328000 time step(s) out of 16000000 completed(42th cardiac cycle 6/10). Time elapsed = 2314.45 [s].
+3336000 time step(s) out of 16000000 completed(42th cardiac cycle 7/10). Time elapsed = 2320.53 [s].
+3344000 time step(s) out of 16000000 completed(42th cardiac cycle 8/10). Time elapsed = 2326.69 [s].
+3352000 time step(s) out of 16000000 completed(42th cardiac cycle 9/10). Time elapsed = 2332.41 [s].
+3360000 time step(s) out of 16000000 completed(42th cardiac cycle 10/10). Time elapsed = 2338.00 [s].
+Finished Cycle no. = 42.0. Time elapsed = 2338.00 [s]
+Checking convergence...
+Q not converged at every artery! Max rel_err_Qartery = 0.001452130748741654 at artery no. 64
+Parm(artery no. 17) not converged! rel_err_Parm = 0.004953883092909069
+Qoutmean_CoW not converged! Max rel_err_QCoWOut = 0.004416771259200356 at artery no. 65
+Everything hasn't converged! if_conv = 0.
+3368000 time step(s) out of 16000000 completed(43th cardiac cycle 1/10). Time elapsed = 2343.84 [s].
+3376000 time step(s) out of 16000000 completed(43th cardiac cycle 2/10). Time elapsed = 2349.41 [s].
+3384000 time step(s) out of 16000000 completed(43th cardiac cycle 3/10). Time elapsed = 2355.11 [s].
+3392000 time step(s) out of 16000000 completed(43th cardiac cycle 4/10). Time elapsed = 2360.82 [s].
+3400000 time step(s) out of 16000000 completed(43th cardiac cycle 5/10). Time elapsed = 2366.42 [s].
+3408000 time step(s) out of 16000000 completed(43th cardiac cycle 6/10). Time elapsed = 2371.99 [s].
+3416000 time step(s) out of 16000000 completed(43th cardiac cycle 7/10). Time elapsed = 2377.40 [s].
+3424000 time step(s) out of 16000000 completed(43th cardiac cycle 8/10). Time elapsed = 2382.93 [s].
+3432000 time step(s) out of 16000000 completed(43th cardiac cycle 9/10). Time elapsed = 2388.38 [s].
+3440000 time step(s) out of 16000000 completed(43th cardiac cycle 10/10). Time elapsed = 2393.99 [s].
+Finished Cycle no. = 43.0. Time elapsed = 2393.99 [s]
+3448000 time step(s) out of 16000000 completed(44th cardiac cycle 1/10). Time elapsed = 2399.53 [s].
+3456000 time step(s) out of 16000000 completed(44th cardiac cycle 2/10). Time elapsed = 2405.04 [s].
+3464000 time step(s) out of 16000000 completed(44th cardiac cycle 3/10). Time elapsed = 2410.50 [s].
+3472000 time step(s) out of 16000000 completed(44th cardiac cycle 4/10). Time elapsed = 2416.01 [s].
+3480000 time step(s) out of 16000000 completed(44th cardiac cycle 5/10). Time elapsed = 2421.46 [s].
+3488000 time step(s) out of 16000000 completed(44th cardiac cycle 6/10). Time elapsed = 2426.90 [s].
+3496000 time step(s) out of 16000000 completed(44th cardiac cycle 7/10). Time elapsed = 2432.36 [s].
+3504000 time step(s) out of 16000000 completed(44th cardiac cycle 8/10). Time elapsed = 2437.75 [s].
+3512000 time step(s) out of 16000000 completed(44th cardiac cycle 9/10). Time elapsed = 2443.25 [s].
+3520000 time step(s) out of 16000000 completed(44th cardiac cycle 10/10). Time elapsed = 2448.76 [s].
+Finished Cycle no. = 44.0. Time elapsed = 2448.76 [s]
+Checking convergence...
+Q not converged at every artery! Max rel_err_Qartery = 0.001176344307625997 at artery no. 57
+Parm(artery no. 17) not converged! rel_err_Parm = 0.0027442027127420688
+Qoutmean_CoW not converged! Max rel_err_QCoWOut = 0.0038247639182344122 at artery no. 65
+Everything hasn't converged! if_conv = 0.
+3528000 time step(s) out of 16000000 completed(45th cardiac cycle 1/10). Time elapsed = 2454.60 [s].
+3536000 time step(s) out of 16000000 completed(45th cardiac cycle 2/10). Time elapsed = 2460.40 [s].
+3544000 time step(s) out of 16000000 completed(45th cardiac cycle 3/10). Time elapsed = 2466.11 [s].
+3552000 time step(s) out of 16000000 completed(45th cardiac cycle 4/10). Time elapsed = 2471.84 [s].
+3560000 time step(s) out of 16000000 completed(45th cardiac cycle 5/10). Time elapsed = 2477.58 [s].
+3568000 time step(s) out of 16000000 completed(45th cardiac cycle 6/10). Time elapsed = 2483.32 [s].
+3576000 time step(s) out of 16000000 completed(45th cardiac cycle 7/10). Time elapsed = 2488.99 [s].
+3584000 time step(s) out of 16000000 completed(45th cardiac cycle 8/10). Time elapsed = 2494.82 [s].
+3592000 time step(s) out of 16000000 completed(45th cardiac cycle 9/10). Time elapsed = 2500.65 [s].
+3600000 time step(s) out of 16000000 completed(45th cardiac cycle 10/10). Time elapsed = 2506.29 [s].
+Finished Cycle no. = 45.0. Time elapsed = 2506.29 [s]
+3608000 time step(s) out of 16000000 completed(46th cardiac cycle 1/10). Time elapsed = 2511.82 [s].
+3616000 time step(s) out of 16000000 completed(46th cardiac cycle 2/10). Time elapsed = 2517.33 [s].
+3624000 time step(s) out of 16000000 completed(46th cardiac cycle 3/10). Time elapsed = 2522.82 [s].
+3632000 time step(s) out of 16000000 completed(46th cardiac cycle 4/10). Time elapsed = 2528.33 [s].
+3640000 time step(s) out of 16000000 completed(46th cardiac cycle 5/10). Time elapsed = 2533.79 [s].
+3648000 time step(s) out of 16000000 completed(46th cardiac cycle 6/10). Time elapsed = 2539.22 [s].
+3656000 time step(s) out of 16000000 completed(46th cardiac cycle 7/10). Time elapsed = 2544.64 [s].
+3664000 time step(s) out of 16000000 completed(46th cardiac cycle 8/10). Time elapsed = 2550.08 [s].
+3672000 time step(s) out of 16000000 completed(46th cardiac cycle 9/10). Time elapsed = 2555.59 [s].
+3680000 time step(s) out of 16000000 completed(46th cardiac cycle 10/10). Time elapsed = 2561.08 [s].
+Finished Cycle no. = 46.0. Time elapsed = 2561.08 [s]
+Checking convergence...
+Q converged at every artery! Max rel_err_Qartery = 0.0008067173168301312 at artery no. 57
+Parm(artery no. 17) converged! rel_err_Parm = 0.0008078003251042227
+Qoutmean_CoW not converged! Max rel_err_QCoWOut = 0.0028205616110182703 at artery no. 61
+Everything hasn't converged! if_conv = 0.
+3688000 time step(s) out of 16000000 completed(47th cardiac cycle 1/10). Time elapsed = 2566.63 [s].
+3696000 time step(s) out of 16000000 completed(47th cardiac cycle 2/10). Time elapsed = 2572.12 [s].
+3704000 time step(s) out of 16000000 completed(47th cardiac cycle 3/10). Time elapsed = 2577.66 [s].
+3712000 time step(s) out of 16000000 completed(47th cardiac cycle 4/10). Time elapsed = 2583.22 [s].
+3720000 time step(s) out of 16000000 completed(47th cardiac cycle 5/10). Time elapsed = 2588.75 [s].
+3728000 time step(s) out of 16000000 completed(47th cardiac cycle 6/10). Time elapsed = 2594.23 [s].
+3736000 time step(s) out of 16000000 completed(47th cardiac cycle 7/10). Time elapsed = 2599.74 [s].
+3744000 time step(s) out of 16000000 completed(47th cardiac cycle 8/10). Time elapsed = 2605.38 [s].
+3752000 time step(s) out of 16000000 completed(47th cardiac cycle 9/10). Time elapsed = 2611.12 [s].
+3760000 time step(s) out of 16000000 completed(47th cardiac cycle 10/10). Time elapsed = 2616.66 [s].
+Finished Cycle no. = 47.0. Time elapsed = 2616.66 [s]
+3768000 time step(s) out of 16000000 completed(48th cardiac cycle 1/10). Time elapsed = 2622.44 [s].
+3776000 time step(s) out of 16000000 completed(48th cardiac cycle 2/10). Time elapsed = 2627.96 [s].
+3784000 time step(s) out of 16000000 completed(48th cardiac cycle 3/10). Time elapsed = 2633.47 [s].
+3792000 time step(s) out of 16000000 completed(48th cardiac cycle 4/10). Time elapsed = 2639.30 [s].
+3800000 time step(s) out of 16000000 completed(48th cardiac cycle 5/10). Time elapsed = 2644.96 [s].
+3808000 time step(s) out of 16000000 completed(48th cardiac cycle 6/10). Time elapsed = 2650.58 [s].
+3816000 time step(s) out of 16000000 completed(48th cardiac cycle 7/10). Time elapsed = 2656.11 [s].
+3824000 time step(s) out of 16000000 completed(48th cardiac cycle 8/10). Time elapsed = 2661.64 [s].
+3832000 time step(s) out of 16000000 completed(48th cardiac cycle 9/10). Time elapsed = 2667.16 [s].
+3840000 time step(s) out of 16000000 completed(48th cardiac cycle 10/10). Time elapsed = 2672.69 [s].
+Finished Cycle no. = 48.0. Time elapsed = 2672.69 [s]
+Checking convergence...
+Q converged at every artery! Max rel_err_Qartery = 0.000770464693230574 at artery no. 59
+Parm(artery no. 17) converged! rel_err_Parm = 0.0005761886092192319
+Qoutmean_CoW not converged! Max rel_err_QCoWOut = 0.0017737837283469794 at artery no. 61
+Everything hasn't converged! if_conv = 0.
+3848000 time step(s) out of 16000000 completed(49th cardiac cycle 1/10). Time elapsed = 2678.26 [s].
+3856000 time step(s) out of 16000000 completed(49th cardiac cycle 2/10). Time elapsed = 2684.09 [s].
+3864000 time step(s) out of 16000000 completed(49th cardiac cycle 3/10). Time elapsed = 2689.70 [s].
+3872000 time step(s) out of 16000000 completed(49th cardiac cycle 4/10). Time elapsed = 2695.27 [s].
+3880000 time step(s) out of 16000000 completed(49th cardiac cycle 5/10). Time elapsed = 2700.79 [s].
+3888000 time step(s) out of 16000000 completed(49th cardiac cycle 6/10). Time elapsed = 2706.23 [s].
+3896000 time step(s) out of 16000000 completed(49th cardiac cycle 7/10). Time elapsed = 2711.71 [s].
+3904000 time step(s) out of 16000000 completed(49th cardiac cycle 8/10). Time elapsed = 2717.48 [s].
+3912000 time step(s) out of 16000000 completed(49th cardiac cycle 9/10). Time elapsed = 2723.15 [s].
+3920000 time step(s) out of 16000000 completed(49th cardiac cycle 10/10). Time elapsed = 2728.78 [s].
+Finished Cycle no. = 49.0. Time elapsed = 2728.78 [s]
+3928000 time step(s) out of 16000000 completed(50th cardiac cycle 1/10). Time elapsed = 2734.22 [s].
+3936000 time step(s) out of 16000000 completed(50th cardiac cycle 2/10). Time elapsed = 2739.70 [s].
+3944000 time step(s) out of 16000000 completed(50th cardiac cycle 3/10). Time elapsed = 2745.16 [s].
+3952000 time step(s) out of 16000000 completed(50th cardiac cycle 4/10). Time elapsed = 2750.59 [s].
+3960000 time step(s) out of 16000000 completed(50th cardiac cycle 5/10). Time elapsed = 2756.02 [s].
+3968000 time step(s) out of 16000000 completed(50th cardiac cycle 6/10). Time elapsed = 2761.46 [s].
+3976000 time step(s) out of 16000000 completed(50th cardiac cycle 7/10). Time elapsed = 2766.90 [s].
+3984000 time step(s) out of 16000000 completed(50th cardiac cycle 8/10). Time elapsed = 2772.33 [s].
+3992000 time step(s) out of 16000000 completed(50th cardiac cycle 9/10). Time elapsed = 2777.83 [s].
+4000000 time step(s) out of 16000000 completed(50th cardiac cycle 10/10). Time elapsed = 2783.27 [s].
+Finished Cycle no. = 50.0. Time elapsed = 2783.27 [s]
+Checking convergence...
+Q converged at every artery! Max rel_err_Qartery = 0.0006713489209286595 at artery no. 59
+Parm(artery no. 17) not converged! rel_err_Parm = 0.0013344978685684136
+Qoutmean_CoW converged! Max rel_err_QCoWOut = 0.0007561571073391786 at artery no. 61
+Everything hasn't converged! if_conv = 0.
+4008000 time step(s) out of 16000000 completed(51th cardiac cycle 1/10). Time elapsed = 2788.76 [s].
+4016000 time step(s) out of 16000000 completed(51th cardiac cycle 2/10). Time elapsed = 2794.32 [s].
+4024000 time step(s) out of 16000000 completed(51th cardiac cycle 3/10). Time elapsed = 2799.80 [s].
+4032000 time step(s) out of 16000000 completed(51th cardiac cycle 4/10). Time elapsed = 2805.31 [s].
+4040000 time step(s) out of 16000000 completed(51th cardiac cycle 5/10). Time elapsed = 2810.75 [s].
+4048000 time step(s) out of 16000000 completed(51th cardiac cycle 6/10). Time elapsed = 2816.18 [s].
+4056000 time step(s) out of 16000000 completed(51th cardiac cycle 7/10). Time elapsed = 2821.55 [s].
+4064000 time step(s) out of 16000000 completed(51th cardiac cycle 8/10). Time elapsed = 2826.98 [s].
+4072000 time step(s) out of 16000000 completed(51th cardiac cycle 9/10). Time elapsed = 2832.44 [s].
+4080000 time step(s) out of 16000000 completed(51th cardiac cycle 10/10). Time elapsed = 2837.91 [s].
+Finished Cycle no. = 51.0. Time elapsed = 2837.91 [s]
+4088000 time step(s) out of 16000000 completed(52th cardiac cycle 1/10). Time elapsed = 2843.38 [s].
+4096000 time step(s) out of 16000000 completed(52th cardiac cycle 2/10). Time elapsed = 2848.81 [s].
+4104000 time step(s) out of 16000000 completed(52th cardiac cycle 3/10). Time elapsed = 2854.28 [s].
+4112000 time step(s) out of 16000000 completed(52th cardiac cycle 4/10). Time elapsed = 2859.81 [s].
+4120000 time step(s) out of 16000000 completed(52th cardiac cycle 5/10). Time elapsed = 2865.21 [s].
+4128000 time step(s) out of 16000000 completed(52th cardiac cycle 6/10). Time elapsed = 2870.64 [s].
+4136000 time step(s) out of 16000000 completed(52th cardiac cycle 7/10). Time elapsed = 2876.09 [s].
+4144000 time step(s) out of 16000000 completed(52th cardiac cycle 8/10). Time elapsed = 2881.51 [s].
+4152000 time step(s) out of 16000000 completed(52th cardiac cycle 9/10). Time elapsed = 2887.01 [s].
+4160000 time step(s) out of 16000000 completed(52th cardiac cycle 10/10). Time elapsed = 2892.50 [s].
+Finished Cycle no. = 52.0. Time elapsed = 2892.50 [s]
+Checking convergence...
+Q converged at every artery! Max rel_err_Qartery = 0.00047501129091126986 at artery no. 59
+Parm(artery no. 17) not converged! rel_err_Parm = 0.0015414870846440617
+Qoutmean_CoW converged! Max rel_err_QCoWOut = 0.0003961569812764869 at artery no. 65
+Everything hasn't converged! if_conv = 0.
+4168000 time step(s) out of 16000000 completed(53th cardiac cycle 1/10). Time elapsed = 2898.03 [s].
+4176000 time step(s) out of 16000000 completed(53th cardiac cycle 2/10). Time elapsed = 2903.51 [s].
+4184000 time step(s) out of 16000000 completed(53th cardiac cycle 3/10). Time elapsed = 2909.18 [s].
+4192000 time step(s) out of 16000000 completed(53th cardiac cycle 4/10). Time elapsed = 2914.72 [s].
+4200000 time step(s) out of 16000000 completed(53th cardiac cycle 5/10). Time elapsed = 2920.33 [s].
+4208000 time step(s) out of 16000000 completed(53th cardiac cycle 6/10). Time elapsed = 2925.94 [s].
+4216000 time step(s) out of 16000000 completed(53th cardiac cycle 7/10). Time elapsed = 2931.37 [s].
+4224000 time step(s) out of 16000000 completed(53th cardiac cycle 8/10). Time elapsed = 2936.85 [s].
+4232000 time step(s) out of 16000000 completed(53th cardiac cycle 9/10). Time elapsed = 2942.31 [s].
+4240000 time step(s) out of 16000000 completed(53th cardiac cycle 10/10). Time elapsed = 2947.76 [s].
+Finished Cycle no. = 53.0. Time elapsed = 2947.76 [s]
+4248000 time step(s) out of 16000000 completed(54th cardiac cycle 1/10). Time elapsed = 2953.31 [s].
+4256000 time step(s) out of 16000000 completed(54th cardiac cycle 2/10). Time elapsed = 2958.85 [s].
+4264000 time step(s) out of 16000000 completed(54th cardiac cycle 3/10). Time elapsed = 2964.35 [s].
+4272000 time step(s) out of 16000000 completed(54th cardiac cycle 4/10). Time elapsed = 2969.80 [s].
+4280000 time step(s) out of 16000000 completed(54th cardiac cycle 5/10). Time elapsed = 2975.20 [s].
+4288000 time step(s) out of 16000000 completed(54th cardiac cycle 6/10). Time elapsed = 2980.70 [s].
+4296000 time step(s) out of 16000000 completed(54th cardiac cycle 7/10). Time elapsed = 2986.17 [s].
+4304000 time step(s) out of 16000000 completed(54th cardiac cycle 8/10). Time elapsed = 2991.64 [s].
+4312000 time step(s) out of 16000000 completed(54th cardiac cycle 9/10). Time elapsed = 2997.17 [s].
+4320000 time step(s) out of 16000000 completed(54th cardiac cycle 10/10). Time elapsed = 3002.66 [s].
+Finished Cycle no. = 54.0. Time elapsed = 3002.66 [s]
+Checking convergence...
+Q converged at every artery! Max rel_err_Qartery = 0.0003920391782057541 at artery no. 64
+Parm(artery no. 17) not converged! rel_err_Parm = 0.0013531082132691402
+Qoutmean_CoW converged! Max rel_err_QCoWOut = 0.0008106916316355669 at artery no. 65
+Everything hasn't converged! if_conv = 0.
+4328000 time step(s) out of 16000000 completed(55th cardiac cycle 1/10). Time elapsed = 3008.14 [s].
+4336000 time step(s) out of 16000000 completed(55th cardiac cycle 2/10). Time elapsed = 3013.57 [s].
+4344000 time step(s) out of 16000000 completed(55th cardiac cycle 3/10). Time elapsed = 3019.04 [s].
+4352000 time step(s) out of 16000000 completed(55th cardiac cycle 4/10). Time elapsed = 3024.63 [s].
+4360000 time step(s) out of 16000000 completed(55th cardiac cycle 5/10). Time elapsed = 3030.12 [s].
+4368000 time step(s) out of 16000000 completed(55th cardiac cycle 6/10). Time elapsed = 3035.58 [s].
+4376000 time step(s) out of 16000000 completed(55th cardiac cycle 7/10). Time elapsed = 3041.02 [s].
+4384000 time step(s) out of 16000000 completed(55th cardiac cycle 8/10). Time elapsed = 3046.44 [s].
+4392000 time step(s) out of 16000000 completed(55th cardiac cycle 9/10). Time elapsed = 3051.99 [s].
+4400000 time step(s) out of 16000000 completed(55th cardiac cycle 10/10). Time elapsed = 3057.47 [s].
+Finished Cycle no. = 55.0. Time elapsed = 3057.47 [s]
+4408000 time step(s) out of 16000000 completed(56th cardiac cycle 1/10). Time elapsed = 3062.92 [s].
+4416000 time step(s) out of 16000000 completed(56th cardiac cycle 2/10). Time elapsed = 3068.38 [s].
+4424000 time step(s) out of 16000000 completed(56th cardiac cycle 3/10). Time elapsed = 3073.80 [s].
+4432000 time step(s) out of 16000000 completed(56th cardiac cycle 4/10). Time elapsed = 3079.20 [s].
+4440000 time step(s) out of 16000000 completed(56th cardiac cycle 5/10). Time elapsed = 3084.55 [s].
+4448000 time step(s) out of 16000000 completed(56th cardiac cycle 6/10). Time elapsed = 3089.87 [s].
+4456000 time step(s) out of 16000000 completed(56th cardiac cycle 7/10). Time elapsed = 3095.23 [s].
+4464000 time step(s) out of 16000000 completed(56th cardiac cycle 8/10). Time elapsed = 3100.62 [s].
+4472000 time step(s) out of 16000000 completed(56th cardiac cycle 9/10). Time elapsed = 3106.04 [s].
+4480000 time step(s) out of 16000000 completed(56th cardiac cycle 10/10). Time elapsed = 3111.52 [s].
+Finished Cycle no. = 56.0. Time elapsed = 3111.52 [s]
+Checking convergence...
+Q converged at every artery! Max rel_err_Qartery = 0.0003136132379246831 at artery no. 64
+Parm(artery no. 17) converged! rel_err_Parm = 0.0009476291808983969
+Qoutmean_CoW converged! Max rel_err_QCoWOut = 0.0009155167023068445 at artery no. 65
+All converged! if_conv = 1.
+Convergence criteria has been met. Performing calculation of last cardiac cycle.
+Last time step reached! Finishing the calculation.
+stop_flag set to 1.
+Total number of cycles = 56
+All convergence criteria has been met.
+Performing virtual surgery (removing stenosis)...
+Stenosis removed from artery 40, nodes 3 to 57.
+1th artery Eh/(r(1-ξ^2)) = 144726.21470777076, wave speed c = 8.262389630689528
+2th artery Eh/(r(1-ξ^2)) = 144726.21470777076, wave speed c = 8.262389630689528
+3th artery Eh/(r(1-ξ^2)) = 193571.32882403414, wave speed c = 9.555481703052683
+4th artery Eh/(r(1-ξ^2)) = 154867.80096385872, wave speed c = 8.546978969861463
+5th artery Eh/(r(1-ξ^2)) = 193900.26498086847, wave speed c = 9.563597081742783
+6th artery Eh/(r(1-ξ^2)) = 221700.55683261508, wave speed c = 10.2262277676085
+7th artery Eh/(r(1-ξ^2)) = 186536.5564124618, wave speed c = 9.38024209197137
+8th artery Eh/(r(1-ξ^2)) = 296557.7537256046, wave speed c = 11.82732991378173
+9th artery Eh/(r(1-ξ^2)) = 233494.58411707645, wave speed c = 10.494710799836549
+10th artery Eh/(r(1-ξ^2)) = 144726.2147077708, wave speed c = 8.26238963068953
+11th artery Eh/(r(1-ξ^2)) = 193716.8435609656, wave speed c = 9.55907263306588
+12th artery Eh/(r(1-ξ^2)) = 144726.21470777143, wave speed c = 8.262389630689547
+13th artery Eh/(r(1-ξ^2)) = 144726.21470786905, wave speed c = 8.262389630692333
+14th artery Eh/(r(1-ξ^2)) = 274884.63442519057, wave speed c = 11.386947062672625
+15th artery Eh/(r(1-ξ^2)) = 154867.80096385872, wave speed c = 8.546978969861463
+16th artery Eh/(r(1-ξ^2)) = 422257.38693281333, wave speed c = 14.113044062290644
+17th artery Eh/(r(1-ξ^2)) = 186536.5564124618, wave speed c = 9.38024209197137
+18th artery Eh/(r(1-ξ^2)) = 233494.58411707645, wave speed c = 10.494710799836549
+19th artery Eh/(r(1-ξ^2)) = 296557.7537256046, wave speed c = 11.82732991378173
+20th artery Eh/(r(1-ξ^2)) = 187334.444027994, wave speed c = 9.400282112085234
+21th artery Eh/(r(1-ξ^2)) = 227039.30190994227, wave speed c = 10.34862359615415
+22th artery Eh/(r(1-ξ^2)) = 247060.63715443102, wave speed c = 10.795278430573227
+23th artery Eh/(r(1-ξ^2)) = 189897.12394463038, wave speed c = 9.464360256679893
+24th artery Eh/(r(1-ξ^2)) = 210148.66245749075, wave speed c = 9.956240634611444
+25th artery Eh/(r(1-ξ^2)) = 144726.21471469395, wave speed c = 8.26238963088715
+26th artery Eh/(r(1-ξ^2)) = 183938.4856328818, wave speed c = 9.31468929268625
+27th artery Eh/(r(1-ξ^2)) = 144726.21474389752, wave speed c = 8.262389631720762
+28th artery Eh/(r(1-ξ^2)) = 194569.7425866419, wave speed c = 9.580092925718263
+29th artery Eh/(r(1-ξ^2)) = 144726.2147807288, wave speed c = 8.262389632772107
+30th artery Eh/(r(1-ξ^2)) = 194569.7425866419, wave speed c = 9.580092925718263
+31th artery Eh/(r(1-ξ^2)) = 144726.2161783952, wave speed c = 8.26238967266835
+32th artery Eh/(r(1-ξ^2)) = 173542.28824959646, wave speed c = 9.047627861989845
+33th artery Eh/(r(1-ξ^2)) = 144726.26804269262, wave speed c = 8.26239115312921
+34th artery Eh/(r(1-ξ^2)) = 166743.33356087314, wave speed c = 8.868625363076317
+35th artery Eh/(r(1-ξ^2)) = 272800.6991551064, wave speed c = 11.34370200036846
+36th artery Eh/(r(1-ξ^2)) = 338194.8986203381, wave speed c = 12.630356114363172
+37th artery Eh/(r(1-ξ^2)) = 205857.7643775971, wave speed c = 9.854071191443483
+38th artery Eh/(r(1-ξ^2)) = 217339.28151678378, wave speed c = 10.125143407248652
+39th artery Eh/(r(1-ξ^2)) = 182877.06738991814, wave speed c = 9.287775171522718
+40th artery Eh/(r(1-ξ^2)) = 185041.89778268136, wave speed c = 9.342586047151753
+41th artery Eh/(r(1-ξ^2)) = 324873.3735817373, wave speed c = 12.37910163743218
+42th artery Eh/(r(1-ξ^2)) = 377311.6950689152, wave speed c = 13.340810119897093
+43th artery Eh/(r(1-ξ^2)) = 514222.8024639273, wave speed c = 15.574271273177816
+44th artery Eh/(r(1-ξ^2)) = 454809.22576600563, wave speed c = 14.646933251135207
+45th artery Eh/(r(1-ξ^2)) = 454809.22576600563, wave speed c = 14.646933251135207
+46th artery Eh/(r(1-ξ^2)) = 514222.8024639273, wave speed c = 15.574271273177816
+47th artery Eh/(r(1-ξ^2)) = 183420.9525621437, wave speed c = 9.301576062490389
+48th artery Eh/(r(1-ξ^2)) = 180391.4689471913, wave speed c = 9.224441204817122
+49th artery Eh/(r(1-ξ^2)) = 166743.33356087314, wave speed c = 8.868625363076317
+50th artery Eh/(r(1-ξ^2)) = 272800.6991551064, wave speed c = 11.34370200036846
+51th artery Eh/(r(1-ξ^2)) = 338194.8986203381, wave speed c = 12.630356114363172
+52th artery Eh/(r(1-ξ^2)) = 205857.7643775971, wave speed c = 9.854071191443483
+53th artery Eh/(r(1-ξ^2)) = 217339.28151678378, wave speed c = 10.125143407248652
+54th artery Eh/(r(1-ξ^2)) = 324873.3735817373, wave speed c = 12.37910163743218
+55th artery Eh/(r(1-ξ^2)) = 377311.6950689152, wave speed c = 13.340810119897093
+56th artery Eh/(r(1-ξ^2)) = 246230.03588317777, wave speed c = 10.777116652478139
+57th artery Eh/(r(1-ξ^2)) = 248077.29093933702, wave speed c = 10.817466896909139
+58th artery Eh/(r(1-ξ^2)) = 264825.70441787667, wave speed c = 11.176662520751533
+59th artery Eh/(r(1-ξ^2)) = 508562.80350639264, wave speed c = 15.488321886553946
+60th artery Eh/(r(1-ξ^2)) = 156972.6456259345, wave speed c = 8.60486494762993
+61th artery Eh/(r(1-ξ^2)) = 181893.14014347392, wave speed c = 9.262756123912181
+62th artery Eh/(r(1-ξ^2)) = 284917.2384826484, wave speed c = 11.592882463501905
+63th artery Eh/(r(1-ξ^2)) = 268383.95541848114, wave speed c = 11.251497917436415
+64th artery Eh/(r(1-ξ^2)) = 299178.87452714384, wave speed c = 11.879482759195
+65th artery Eh/(r(1-ξ^2)) = 232062.17727015226, wave speed c = 10.462470605223517
+66th artery Eh/(r(1-ξ^2)) = 282409.76694652525, wave speed c = 11.541756981502386
+67th artery Eh/(r(1-ξ^2)) = 221563.119084205, wave speed c = 10.223057528371763
+68th artery Eh/(r(1-ξ^2)) = 203535.3325918409, wave speed c = 9.798328038734054
+69th artery Eh/(r(1-ξ^2)) = 306452.26074879215, wave speed c = 12.023017640484127
+70th artery Eh/(r(1-ξ^2)) = 361413.03030681435, wave speed c = 13.056716451096976
+71th artery Eh/(r(1-ξ^2)) = 237446.2843002447, wave speed c = 10.583145292991505
+72th artery Eh/(r(1-ξ^2)) = 154727.09560502943, wave speed c = 8.543095402661505
+73th artery Eh/(r(1-ξ^2)) = 154727.09560502943, wave speed c = 8.543095402661505
+74th artery Eh/(r(1-ξ^2)) = 657445.5132180705, wave speed c = 17.610105284231874
+75th artery Eh/(r(1-ξ^2)) = 657445.5132180705, wave speed c = 17.610105284231874
+76th artery Eh/(r(1-ξ^2)) = 196641.945397464, wave speed c = 9.630972672655929
+77th artery Eh/(r(1-ξ^2)) = 196641.945397464, wave speed c = 9.630972672655929
+78th artery Eh/(r(1-ξ^2)) = 616889.2062783347, wave speed c = 17.05829635865176
+79th artery Eh/(r(1-ξ^2)) = 616889.2062783347, wave speed c = 17.05829635865176
+80th artery Eh/(r(1-ξ^2)) = 484624.3718811887, wave speed c = 15.11940481073079
+81th artery Eh/(r(1-ξ^2)) = 484624.3718811887, wave speed c = 15.11940481073079
+82th artery Eh/(r(1-ξ^2)) = 484624.3718811887, wave speed c = 15.11940481073079
+83th artery Eh/(r(1-ξ^2)) = 484624.3718811887, wave speed c = 15.11940481073079
+Setting qap to 0 for 1D and 0D models after virtual surgery...
+Cycles before virtual surgery: 56.
+Stenosis removed! Redoing the calculation.
+4488000 time step(s) out of 20480000 completed(57th cardiac cycle 1/10). Time elapsed = 3116.89 [s].
+4496000 time step(s) out of 20480000 completed(57th cardiac cycle 2/10). Time elapsed = 3121.74 [s].
+4504000 time step(s) out of 20480000 completed(57th cardiac cycle 3/10). Time elapsed = 3126.57 [s].
+4512000 time step(s) out of 20480000 completed(57th cardiac cycle 4/10). Time elapsed = 3131.39 [s].
+4520000 time step(s) out of 20480000 completed(57th cardiac cycle 5/10). Time elapsed = 3136.14 [s].
+4528000 time step(s) out of 20480000 completed(57th cardiac cycle 6/10). Time elapsed = 3140.90 [s].
+4536000 time step(s) out of 20480000 completed(57th cardiac cycle 7/10). Time elapsed = 3145.69 [s].
+4544000 time step(s) out of 20480000 completed(57th cardiac cycle 8/10). Time elapsed = 3150.45 [s].
+4552000 time step(s) out of 20480000 completed(57th cardiac cycle 9/10). Time elapsed = 3155.33 [s].
+4560000 time step(s) out of 20480000 completed(57th cardiac cycle 10/10). Time elapsed = 3160.16 [s].
+Finished Cycle no. = 57.0. Time elapsed = 3160.16 [s]
+4568000 time step(s) out of 20480000 completed(58th cardiac cycle 1/10). Time elapsed = 3165.01 [s].
+4576000 time step(s) out of 20480000 completed(58th cardiac cycle 2/10). Time elapsed = 3169.84 [s].
+4584000 time step(s) out of 20480000 completed(58th cardiac cycle 3/10). Time elapsed = 3174.70 [s].
+4592000 time step(s) out of 20480000 completed(58th cardiac cycle 4/10). Time elapsed = 3179.53 [s].
+4600000 time step(s) out of 20480000 completed(58th cardiac cycle 5/10). Time elapsed = 3184.36 [s].
+4608000 time step(s) out of 20480000 completed(58th cardiac cycle 6/10). Time elapsed = 3189.08 [s].
+4616000 time step(s) out of 20480000 completed(58th cardiac cycle 7/10). Time elapsed = 3193.90 [s].
+4624000 time step(s) out of 20480000 completed(58th cardiac cycle 8/10). Time elapsed = 3198.71 [s].
+4632000 time step(s) out of 20480000 completed(58th cardiac cycle 9/10). Time elapsed = 3203.51 [s].
+4640000 time step(s) out of 20480000 completed(58th cardiac cycle 10/10). Time elapsed = 3208.32 [s].
+Finished Cycle no. = 58.0. Time elapsed = 3208.32 [s]
+Checking convergence...
+Q not converged at every artery! Max rel_err_Qartery = 0.14104356177649263 at artery no. 59
+Everything hasn't converged! if_conv = 0.
+4648000 time step(s) out of 20480000 completed(59th cardiac cycle 1/10). Time elapsed = 3213.22 [s].
+4656000 time step(s) out of 20480000 completed(59th cardiac cycle 2/10). Time elapsed = 3218.08 [s].
+4664000 time step(s) out of 20480000 completed(59th cardiac cycle 3/10). Time elapsed = 3222.93 [s].
+4672000 time step(s) out of 20480000 completed(59th cardiac cycle 4/10). Time elapsed = 3227.72 [s].
+4680000 time step(s) out of 20480000 completed(59th cardiac cycle 5/10). Time elapsed = 3232.49 [s].
+4688000 time step(s) out of 20480000 completed(59th cardiac cycle 6/10). Time elapsed = 3237.32 [s].
+4696000 time step(s) out of 20480000 completed(59th cardiac cycle 7/10). Time elapsed = 3242.26 [s].
+4704000 time step(s) out of 20480000 completed(59th cardiac cycle 8/10). Time elapsed = 3247.07 [s].
+4712000 time step(s) out of 20480000 completed(59th cardiac cycle 9/10). Time elapsed = 3251.88 [s].
+4720000 time step(s) out of 20480000 completed(59th cardiac cycle 10/10). Time elapsed = 3256.85 [s].
+Finished Cycle no. = 59.0. Time elapsed = 3256.85 [s]
+4728000 time step(s) out of 20480000 completed(60th cardiac cycle 1/10). Time elapsed = 3261.83 [s].
+4736000 time step(s) out of 20480000 completed(60th cardiac cycle 2/10). Time elapsed = 3266.64 [s].
+4744000 time step(s) out of 20480000 completed(60th cardiac cycle 3/10). Time elapsed = 3271.55 [s].
+4752000 time step(s) out of 20480000 completed(60th cardiac cycle 4/10). Time elapsed = 3276.64 [s].
+4760000 time step(s) out of 20480000 completed(60th cardiac cycle 5/10). Time elapsed = 3281.90 [s].
+4768000 time step(s) out of 20480000 completed(60th cardiac cycle 6/10). Time elapsed = 3286.68 [s].
+4776000 time step(s) out of 20480000 completed(60th cardiac cycle 7/10). Time elapsed = 3291.59 [s].
+4784000 time step(s) out of 20480000 completed(60th cardiac cycle 8/10). Time elapsed = 3296.42 [s].
+4792000 time step(s) out of 20480000 completed(60th cardiac cycle 9/10). Time elapsed = 3301.25 [s].
+4800000 time step(s) out of 20480000 completed(60th cardiac cycle 10/10). Time elapsed = 3306.07 [s].
+Finished Cycle no. = 60.0. Time elapsed = 3306.07 [s]
+Checking convergence...
+Q not converged at every artery! Max rel_err_Qartery = 0.014552298844049447 at artery no. 59
+Everything hasn't converged! if_conv = 0.
+4808000 time step(s) out of 20480000 completed(61th cardiac cycle 1/10). Time elapsed = 3311.11 [s].
+4816000 time step(s) out of 20480000 completed(61th cardiac cycle 2/10). Time elapsed = 3315.93 [s].
+4824000 time step(s) out of 20480000 completed(61th cardiac cycle 3/10). Time elapsed = 3320.82 [s].
+4832000 time step(s) out of 20480000 completed(61th cardiac cycle 4/10). Time elapsed = 3325.73 [s].
+4840000 time step(s) out of 20480000 completed(61th cardiac cycle 5/10). Time elapsed = 3330.50 [s].
+4848000 time step(s) out of 20480000 completed(61th cardiac cycle 6/10). Time elapsed = 3335.38 [s].
+4856000 time step(s) out of 20480000 completed(61th cardiac cycle 7/10). Time elapsed = 3340.20 [s].
+4864000 time step(s) out of 20480000 completed(61th cardiac cycle 8/10). Time elapsed = 3344.99 [s].
+4872000 time step(s) out of 20480000 completed(61th cardiac cycle 9/10). Time elapsed = 3350.49 [s].
+4880000 time step(s) out of 20480000 completed(61th cardiac cycle 10/10). Time elapsed = 3355.59 [s].
+Finished Cycle no. = 61.0. Time elapsed = 3355.59 [s]
+4888000 time step(s) out of 20480000 completed(62th cardiac cycle 1/10). Time elapsed = 3360.54 [s].
+4896000 time step(s) out of 20480000 completed(62th cardiac cycle 2/10). Time elapsed = 3365.50 [s].
+4904000 time step(s) out of 20480000 completed(62th cardiac cycle 3/10). Time elapsed = 3370.33 [s].
+4912000 time step(s) out of 20480000 completed(62th cardiac cycle 4/10). Time elapsed = 3375.21 [s].
+4920000 time step(s) out of 20480000 completed(62th cardiac cycle 5/10). Time elapsed = 3380.05 [s].
+4928000 time step(s) out of 20480000 completed(62th cardiac cycle 6/10). Time elapsed = 3384.89 [s].
+4936000 time step(s) out of 20480000 completed(62th cardiac cycle 7/10). Time elapsed = 3389.66 [s].
+4944000 time step(s) out of 20480000 completed(62th cardiac cycle 8/10). Time elapsed = 3394.51 [s].
+4952000 time step(s) out of 20480000 completed(62th cardiac cycle 9/10). Time elapsed = 3399.41 [s].
+4960000 time step(s) out of 20480000 completed(62th cardiac cycle 10/10). Time elapsed = 3404.23 [s].
+Finished Cycle no. = 62.0. Time elapsed = 3404.23 [s]
+Checking convergence...
+Q not converged at every artery! Max rel_err_Qartery = 0.0070815226916590415 at artery no. 59
+Everything hasn't converged! if_conv = 0.
+4968000 time step(s) out of 20480000 completed(63th cardiac cycle 1/10). Time elapsed = 3409.23 [s].
+4976000 time step(s) out of 20480000 completed(63th cardiac cycle 2/10). Time elapsed = 3414.17 [s].
+4984000 time step(s) out of 20480000 completed(63th cardiac cycle 3/10). Time elapsed = 3419.02 [s].
+4992000 time step(s) out of 20480000 completed(63th cardiac cycle 4/10). Time elapsed = 3423.89 [s].
+5000000 time step(s) out of 20480000 completed(63th cardiac cycle 5/10). Time elapsed = 3428.72 [s].
+5008000 time step(s) out of 20480000 completed(63th cardiac cycle 6/10). Time elapsed = 3433.52 [s].
+5016000 time step(s) out of 20480000 completed(63th cardiac cycle 7/10). Time elapsed = 3438.30 [s].
+5024000 time step(s) out of 20480000 completed(63th cardiac cycle 8/10). Time elapsed = 3443.06 [s].
+5032000 time step(s) out of 20480000 completed(63th cardiac cycle 9/10). Time elapsed = 3447.92 [s].
+5040000 time step(s) out of 20480000 completed(63th cardiac cycle 10/10). Time elapsed = 3452.77 [s].
+Finished Cycle no. = 63.0. Time elapsed = 3452.77 [s]
+5048000 time step(s) out of 20480000 completed(64th cardiac cycle 1/10). Time elapsed = 3457.74 [s].
+5056000 time step(s) out of 20480000 completed(64th cardiac cycle 2/10). Time elapsed = 3462.69 [s].
+5064000 time step(s) out of 20480000 completed(64th cardiac cycle 3/10). Time elapsed = 3467.55 [s].
+5072000 time step(s) out of 20480000 completed(64th cardiac cycle 4/10). Time elapsed = 3472.48 [s].
+5080000 time step(s) out of 20480000 completed(64th cardiac cycle 5/10). Time elapsed = 3477.34 [s].
+5088000 time step(s) out of 20480000 completed(64th cardiac cycle 6/10). Time elapsed = 3482.21 [s].
+5096000 time step(s) out of 20480000 completed(64th cardiac cycle 7/10). Time elapsed = 3487.06 [s].
+5104000 time step(s) out of 20480000 completed(64th cardiac cycle 8/10). Time elapsed = 3491.84 [s].
+5112000 time step(s) out of 20480000 completed(64th cardiac cycle 9/10). Time elapsed = 3496.61 [s].
+5120000 time step(s) out of 20480000 completed(64th cardiac cycle 10/10). Time elapsed = 3501.39 [s].
+Finished Cycle no. = 64.0. Time elapsed = 3501.39 [s]
+Checking convergence...
+Q not converged at every artery! Max rel_err_Qartery = 0.0030825834978988904 at artery no. 59
+Everything hasn't converged! if_conv = 0.
+5128000 time step(s) out of 20480000 completed(65th cardiac cycle 1/10). Time elapsed = 3506.29 [s].
+5136000 time step(s) out of 20480000 completed(65th cardiac cycle 2/10). Time elapsed = 3511.18 [s].
+5144000 time step(s) out of 20480000 completed(65th cardiac cycle 3/10). Time elapsed = 3516.24 [s].
+5152000 time step(s) out of 20480000 completed(65th cardiac cycle 4/10). Time elapsed = 3521.33 [s].
+5160000 time step(s) out of 20480000 completed(65th cardiac cycle 5/10). Time elapsed = 3526.27 [s].
+5168000 time step(s) out of 20480000 completed(65th cardiac cycle 6/10). Time elapsed = 3531.15 [s].
+5176000 time step(s) out of 20480000 completed(65th cardiac cycle 7/10). Time elapsed = 3536.22 [s].
+5184000 time step(s) out of 20480000 completed(65th cardiac cycle 8/10). Time elapsed = 3541.17 [s].
+5192000 time step(s) out of 20480000 completed(65th cardiac cycle 9/10). Time elapsed = 3546.00 [s].
+5200000 time step(s) out of 20480000 completed(65th cardiac cycle 10/10). Time elapsed = 3550.81 [s].
+Finished Cycle no. = 65.0. Time elapsed = 3550.81 [s]
+5208000 time step(s) out of 20480000 completed(66th cardiac cycle 1/10). Time elapsed = 3555.72 [s].
+5216000 time step(s) out of 20480000 completed(66th cardiac cycle 2/10). Time elapsed = 3560.63 [s].
+5224000 time step(s) out of 20480000 completed(66th cardiac cycle 3/10). Time elapsed = 3565.49 [s].
+5232000 time step(s) out of 20480000 completed(66th cardiac cycle 4/10). Time elapsed = 3570.29 [s].
+5240000 time step(s) out of 20480000 completed(66th cardiac cycle 5/10). Time elapsed = 3575.09 [s].
+5248000 time step(s) out of 20480000 completed(66th cardiac cycle 6/10). Time elapsed = 3579.95 [s].
+5256000 time step(s) out of 20480000 completed(66th cardiac cycle 7/10). Time elapsed = 3584.68 [s].
+5264000 time step(s) out of 20480000 completed(66th cardiac cycle 8/10). Time elapsed = 3589.47 [s].
+5272000 time step(s) out of 20480000 completed(66th cardiac cycle 9/10). Time elapsed = 3594.41 [s].
+5280000 time step(s) out of 20480000 completed(66th cardiac cycle 10/10). Time elapsed = 3599.29 [s].
+Finished Cycle no. = 66.0. Time elapsed = 3599.29 [s]
+Checking convergence...
+Q not converged at every artery! Max rel_err_Qartery = 0.0013085228805107842 at artery no. 59
+Everything hasn't converged! if_conv = 0.
+5288000 time step(s) out of 20480000 completed(67th cardiac cycle 1/10). Time elapsed = 3604.24 [s].
+5296000 time step(s) out of 20480000 completed(67th cardiac cycle 2/10). Time elapsed = 3609.10 [s].
+5304000 time step(s) out of 20480000 completed(67th cardiac cycle 3/10). Time elapsed = 3613.96 [s].
+5312000 time step(s) out of 20480000 completed(67th cardiac cycle 4/10). Time elapsed = 3618.73 [s].
+5320000 time step(s) out of 20480000 completed(67th cardiac cycle 5/10). Time elapsed = 3623.56 [s].
+5328000 time step(s) out of 20480000 completed(67th cardiac cycle 6/10). Time elapsed = 3628.37 [s].
+5336000 time step(s) out of 20480000 completed(67th cardiac cycle 7/10). Time elapsed = 3633.17 [s].
+5344000 time step(s) out of 20480000 completed(67th cardiac cycle 8/10). Time elapsed = 3638.04 [s].
+5352000 time step(s) out of 20480000 completed(67th cardiac cycle 9/10). Time elapsed = 3642.99 [s].
+5360000 time step(s) out of 20480000 completed(67th cardiac cycle 10/10). Time elapsed = 3647.97 [s].
+Finished Cycle no. = 67.0. Time elapsed = 3647.97 [s]
+5368000 time step(s) out of 20480000 completed(68th cardiac cycle 1/10). Time elapsed = 3652.94 [s].
+5376000 time step(s) out of 20480000 completed(68th cardiac cycle 2/10). Time elapsed = 3657.83 [s].
+5384000 time step(s) out of 20480000 completed(68th cardiac cycle 3/10). Time elapsed = 3662.77 [s].
+5392000 time step(s) out of 20480000 completed(68th cardiac cycle 4/10). Time elapsed = 3667.59 [s].
+5400000 time step(s) out of 20480000 completed(68th cardiac cycle 5/10). Time elapsed = 3672.41 [s].
+5408000 time step(s) out of 20480000 completed(68th cardiac cycle 6/10). Time elapsed = 3677.20 [s].
+5416000 time step(s) out of 20480000 completed(68th cardiac cycle 7/10). Time elapsed = 3681.98 [s].
+5424000 time step(s) out of 20480000 completed(68th cardiac cycle 8/10). Time elapsed = 3686.80 [s].
+5432000 time step(s) out of 20480000 completed(68th cardiac cycle 9/10). Time elapsed = 3691.66 [s].
+5440000 time step(s) out of 20480000 completed(68th cardiac cycle 10/10). Time elapsed = 3696.55 [s].
+Finished Cycle no. = 68.0. Time elapsed = 3696.55 [s]
+Checking convergence...
+Q converged at every artery! Max rel_err_Qartery = 0.0005234959426800342 at artery no. 59
+All converged! if_conv = 1.
+Convergence criteria has been met. Performing calculation of last cardiac cycle.
+Last time step reached! Finishing the calculation.
+stop_flag set to 1.
+Total number of cycles = 68
+All convergence criteria has been met.
+******************** End calculation loop ********************
