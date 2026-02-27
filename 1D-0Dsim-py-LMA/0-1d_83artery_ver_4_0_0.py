@@ -1470,6 +1470,26 @@ print("********************Start calculation loop********************")
 nbegin = 1
 nnn = nbegin # initialize
 
+# for hot start, edited by Thomas 240226
+checkpoint_file = "simulation_checkpoint.npz"
+
+if os.path.exists(checkpoint_file):
+    print(">>> Found previous run state. Overwriting zeros for hot-start...")
+    data = np.load(checkpoint_file)
+
+    # Fill the arrays you just initialized with the saved data
+    Qtree[:] = data['Qtree']
+    Atree[:] = data['Atree']
+    Utree[:] = data['Utree']
+    Ptree[:] = data['Ptree']
+    Vtree0d[:] = data['Vtree0d']
+    Qtree0d[:] = data['Qtree0d']
+    result[:] = data['result']
+    RLCtree[:] = data['RLCtree']
+
+else:
+    print(">>> No previous run state found. Starting with fresh initialization...")
+
 while nnn < nlast + 1: # time step loop
 
     # for debug
@@ -1964,6 +1984,12 @@ while nnn < nlast + 1: # time step loop
                 LMAno = 84 + i
                 row = [LMAno, RLCtree[2,LMAno,1], RLCtree[2,LMAno,2], RLCtree[2,LMAno,3], 1.0 / RLCtree[3,LMAno,1], 1.0 / RLCtree[1,LMAno,2]]
                 writer.writerow(row)
+
+        # for hot start, edited by Thomas 240226
+        np.savez(checkpoint_file,
+                 Qtree=Qtree, Atree=Atree, Utree=Utree, Ptree=Ptree,
+                 Vtree0d=Vtree0d, Qtree0d=Qtree0d, result=result, RLCtree=RLCtree)
+        print(f">>> Hot-start state saved to {checkpoint_file}")
     
     # output visualization data
     if ((visualization == 1 and (nnn >= viz_str * nduration and nnn <= viz_end * nduration)) or (visualization == 2 and (nnn >= nlast-nduration and nnn <= nlast))):
