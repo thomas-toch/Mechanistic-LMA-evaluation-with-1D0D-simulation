@@ -432,201 +432,228 @@ def ra(tcr,tar,tac,Tduration): # right atrium: era
 # function for simulation loop
 # 0-1d coupling computation
 @njit(fastmath=True)
-def interface_01d(nnn,nartery,imaxtree,Atreem,Qtreem,Utreem,Qtree,Atree,
-                  A0,P1u,p0,mbif_par,Qguess,nzeromodel,Dif_ratio,Q_temp,A_temp,W1,W2,rukuk,
-                  Vtree0d,Ptree0d,Qtree0d,v,dv,q,dvq,P_0d,result,tee,tac,tar,tcr,
-                  dx,dt,roi,tbeta,A_term1,remuda0,c_relax,itermax_0d,Tduration,nbegin,
-                  iterrelax_0d,converge_cri_coup,mmhgtoPa,RLCtree,numlma,nzm_lma,nzm_cowoutlet,Cval,Eval,Avalve,
-                  arterynode_map,i_upper_or_lower,artery_to_0dindex,sim_LMA,disregard_LMA):
-
+def interface_01d(nnn, nartery, imaxtree, Atreem, Qtreem, Utreem, Qtree, Atree,
+                  A0, P1u, p0, mbif_par, Qguess, nzeromodel, Dif_ratio, Q_temp, A_temp, W1, W2, rukuk,
+                  Vtree0d, Ptree0d, Qtree0d, v, dv, q, dvq, P_0d, result, tee, tac, tar, tcr,
+                  dx, dt, roi, tbeta, A_term1, remuda0, c_relax, itermax_0d, Tduration, nbegin,
+                  iterrelax_0d, converge_cri_coup, mmhgtoPa, RLCtree, numlma, nzm_lma, nzm_cowoutlet, Cval, Eval,
+                  Avalve,
+                  arterynode_map, i_upper_or_lower, artery_to_0dindex, sim_LMA, disregard_LMA):
     # Initialization
-    if nnn == nbegin: # If first time step of first caridiac cycle
+    if nnn == nbegin:
         print("Initialize 0d model calculation.")
 
-    Qguess, W1, W2, A_term1, remuda0 = Qguesscal(nartery,mbif_par,imaxtree,Atree,Qtree,A0,Qtreem,
-                               dt,roi,dx,Qguess,W1,W2,tbeta,A_term1,remuda0)
+    Qguess, W1, W2, A_term1, remuda0 = Qguesscal(nartery, mbif_par, imaxtree, Atree, Qtree, A0, Qtreem,
+                                                 dt, roi, dx, Qguess, W1, W2, tbeta, A_term1, remuda0)
 
-    # for debug
-    # print(f"niter_0dcount = {niter_0dcount}, Qguess = {Qguess}")
-        
-    niter_0dcount = 0 # iteration counter for coupling calculation 
-    C_ratto = 0.0 # convergence ratio for coupling calculation
+    niter_0dcount = 0
+    C_ratto = 0.0
 
-    # save previous values of last step if first iteration of 0d model
-    result[:,0] = result[:,1] # previous step[*,1] will be saved to result[*,0]
+    result[:, 0] = result[:, 1]
 
-    while niter_0dcount < itermax_0d + 1: # repeat until converged
-        
-        result,P1u,q,v,dv,dvq,P_0d,Ptree0d,Qtree0d,Qguess,Vtree0d,Cval,Eval,Avalve = zerodmodel(nnn,nartery,
-                mbif_par,niter_0dcount,nzeromodel,Qguess,
-                result,tee,tac,tar,tcr,q,v,dv,dvq,rukuk,
-                P_0d,Ptree0d,Qtree0d,Vtree0d,P1u,RLCtree,numlma,nzm_lma,nzm_cowoutlet,
-                dt,Tduration,Cval,Eval,Avalve,arterynode_map,
-                i_upper_or_lower,artery_to_0dindex,sim_LMA,disregard_LMA) # Call the 0D model function
+    while niter_0dcount < itermax_0d + 1:
 
-        niter_0dcount += 1 # increment the iteration counter
+        result, P1u, q, v, dv, dvq, P_0d, Ptree0d, Qtree0d, Qguess, Vtree0d, Cval, Eval, Avalve = zerodmodel(nnn,
+                                                                                                             nartery,
+                                                                                                             mbif_par,
+                                                                                                             niter_0dcount,
+                                                                                                             nzeromodel,
+                                                                                                             Qguess,
+                                                                                                             result,
+                                                                                                             tee, tac,
+                                                                                                             tar, tcr,
+                                                                                                             q, v, dv,
+                                                                                                             dvq, rukuk,
+                                                                                                             P_0d,
+                                                                                                             Ptree0d,
+                                                                                                             Qtree0d,
+                                                                                                             Vtree0d,
+                                                                                                             P1u,
+                                                                                                             RLCtree,
+                                                                                                             numlma,
+                                                                                                             nzm_lma,
+                                                                                                             nzm_cowoutlet,
+                                                                                                             dt,
+                                                                                                             Tduration,
+                                                                                                             Cval, Eval,
+                                                                                                             Avalve,
+                                                                                                             arterynode_map,
+                                                                                                             i_upper_or_lower,
+                                                                                                             artery_to_0dindex,
+                                                                                                             sim_LMA,
+                                                                                                             disregard_LMA)
 
-        if niter_0dcount == iterrelax_0d: # if the iteration count exceeds itermax_0d, decrease the relaxation factor
+        niter_0dcount += 1
+
+        if niter_0dcount == iterrelax_0d:
             c_relax = c_relax / 5.0
-        if niter_0dcount == iterrelax_0d * 3: # if the iteration count exceeds itermax_0d * 3, decrease the relaxation factor again
+        if niter_0dcount == iterrelax_0d * 3:
             c_relax = c_relax / 10.0
 
-        # unit conversion from 0d to 1d
-        Qguess[1:nartery+1] = Qguess[1:nartery+1] * 0.000001 # [m^3/s] to [ml/s]
-        P1u[1:nartery+1] = P1u[1:nartery+1] * mmhgtoPa - p0
+        Qguess[1:nartery + 1] = Qguess[1:nartery + 1] * 0.000001
+        P1u[1:nartery + 1] = P1u[1:nartery + 1] * mmhgtoPa - p0
 
-        # for debug
-        # print(f"niter_0dcount = {niter_0dcount}, Qguess = {Qguess}")
+        C_ratto = 0.0
+        Dif_ratio.fill(0.0)
+        Q_temp.fill(0.0)
+        A_temp.fill(0.0)
 
-        C_ratto = 0.0 # reset the convergence ratio each iteration
-        Dif_ratio.fill(0.0) # reset the difference ratio array
-        Q_temp.fill(0.0) # reset the temporary Q array
-        A_temp.fill(0.0) # reset the temporary A array
+        C_ratto, Avalve = Crattocal(nartery, mbif_par, imaxtree, P1u, tbeta, A0, roi, Qguess, Dif_ratio,
+                                    W1, W2, q, A_temp, Q_temp, C_ratto, Avalve, A_term1, remuda0)
 
-        # for debug
-        # print(f"nnn = {nnn}, niter_0dcount = {niter_0dcount}")
-
-        C_ratto, Avalve = Crattocal(nartery,mbif_par,imaxtree,P1u,tbeta,A0,roi,Qguess,Dif_ratio,
-              W1,W2,q,A_temp,Q_temp,C_ratto,Avalve,A_term1,remuda0)
-        
-        # for debug
-        # print(f"nnn = {nnn}, niter_0dcount = {niter_0dcount}, C_ratto = {C_ratto}")
-
-        if C_ratto < converge_cri_coup: # if converged, break the loop
-            # for debug
-            # if nnn % 25 == 0:
-            #     print(f"nnn = {nnn}, P1u[1] = {P1u[1]}, Qtemp[1] = {Q_temp[1]*(10**6)}")
-            # print(f"Q_temp = {Q_temp}, C_ratto = {C_ratto}, Dif_ratio = {Dif_ratio}")
-            # print(niter_0dcount, "th iteration of 0-1D coupling calculation converged.")
+        if C_ratto < converge_cri_coup:
             break
-        
-        else: # if not converged, update Qguess
-            Qguess[1:nartery+1] = Qguess[1:nartery+1] + (Q_temp[1:nartery+1] - Qguess[1:nartery+1]) * c_relax
 
-    # replace the end node of 1d Q, A, P arterial tree with the new values calculated by coupling
-    Atreem[1,0] = A_temp[1]
-    Qtreem[1,0] = Q_temp[1]
-    Utreem[1,0] = Qtreem[1,0] / Atreem[1,0]
-    for n in range(2,nartery + 1):
-        if mbif_par[n,0] in [0,4]:
-            Atreem[n,imaxtree[n]] = A_temp[n]
-            Qtreem[n,imaxtree[n]] = Q_temp[n]
-            Utreem[n,imaxtree[n]] = Qtreem[n,imaxtree[n]] / Atreem[n,imaxtree[n]]
+        else:
+            Qguess[1:nartery + 1] = Qguess[1:nartery + 1] + (Q_temp[1:nartery + 1] - Qguess[1:nartery + 1]) * c_relax
+
+    # replace end nodes
+    if Atreem[1, 0] == 0:
+        print("ERROR interface_01d: Atreem[1,0] is zero.")
+
+    Atreem[1, 0] = A_temp[1]
+    Qtreem[1, 0] = Q_temp[1]
+    Utreem[1, 0] = Qtreem[1, 0] / Atreem[1, 0]
+
+    for n in range(2, nartery + 1):
+        if mbif_par[n, 0] in [0, 4]:
+            Atreem[n, imaxtree[n]] = A_temp[n]
+            Qtreem[n, imaxtree[n]] = Q_temp[n]
+
+            if Atreem[n, imaxtree[n]] == 0:
+                print("ERROR interface_01d: Atreem is zero for artery", n)
+
+            Utreem[n, imaxtree[n]] = Qtreem[n, imaxtree[n]] / Atreem[n, imaxtree[n]]
         else:
             continue
 
-    # return the updated Atreem, Qtreem, Utreem arrays and iteration count from 0-1D coupling calculation
     return (Atreem, Qtreem, Utreem, Vtree0d, Qtree0d, Qguess, P_0d, q, v, dv, dvq,
-             Ptree0d, niter_0dcount, result, Cval, Eval, Avalve)
+            Ptree0d, niter_0dcount, result, Cval, Eval, Avalve)
+
 
 @njit(fastmath=True)
-def Qguesscal(nartery,mbif_par,imaxtree,Atree,Qtree,A0,Qtreem,dt,roi,dx,Qguess,
-              W1,W2,tbeta,A_term1,remuda0):
-
-    for n in range(1,nartery + 1): # calculate the reimann variables for the end and the start node of terminal arteries
-
-        # calculate the reimann variables for the start and the end node of terminal arteries
+def Qguesscal(nartery, mbif_par, imaxtree, Atree, Qtree, A0, Qtreem, dt, roi, dx, Qguess,
+              W1, W2, tbeta, A_term1, remuda0):
+    for n in range(1, nartery + 1):
         if n == 1:
             j = 0
-            Ax0 = Atree[n,0]
-            Ax00 = A0[n,0]
-            Ax1 = Atree[n,1]
-            Ax10 = A0[n,1]
-            #tbeta0 = (Ek1 * exp(Ek2 * Rtree0[0,n]) + Ek3) * sqrt(Ax00) * cof_ela[n]
-            tbeta0 = tbeta[n,0] * sqrt(Ax00)
+            Ax0 = Atree[n, 0]
+            Ax00 = A0[n, 0]
+            Ax1 = Atree[n, 1]
+            Ax10 = A0[n, 1]
+
+            # Debug checks for division by zero or sqrt of negative/zero
+            if Ax0 <= 0 or Ax00 <= 0 or Ax1 <= 0 or Ax10 <= 0:
+                print("ERROR Qguesscal n=1: Zero area detected. Ax0:", Ax0, "Ax00:", Ax00, "Ax1:", Ax1, "Ax10:", Ax10)
+            if dx == 0:
+                print("ERROR Qguesscal n=1: dx is zero.")
+            if tbeta[n, j] == 0:
+                print("ERROR Qguesscal n=1: tbeta is zero.")
+
+            tbeta0 = tbeta[n, 0] * sqrt(Ax00)
             tsq0 = sqrt(tbeta0 * roi * 0.5 / Ax00)
-            #tbeta1 = (Ek1 * exp(Ek2 * Rtree0[1,n]) + Ek3) * sqrt(Ax10) * cof_ela[n]
-            tbeta1 = tbeta[n,1] * sqrt(Ax10)
+            tbeta1 = tbeta[n, 1] * sqrt(Ax10)
             tsq1 = sqrt(tbeta1 * roi * 0.5 / Ax10)
-            remd0 = Qtree[n,0] / Ax0 + tsq0 * sqrt(sqrt(Ax0))
-            remd1 = Qtree[n,1] / Ax1 + tsq1 * sqrt(sqrt(Ax1))
+            remd0 = Qtree[n, 0] / Ax0 + tsq0 * sqrt(sqrt(Ax0))
+            remd1 = Qtree[n, 1] / Ax1 + tsq1 * sqrt(sqrt(Ax1))
             x_d_t = (remd0 + remd1) * 0.5 * dt
-            rieman0 = Qtree[n,0] / Ax0 - 4.0 * tsq0 * (sqrt(sqrt(Ax0)) - sqrt(sqrt(Ax00))) # sqrt(tbeta0 * roi / 2.0 / Ax00) * ((Ax0 ** 0.25) - (Ax00 ** 0.25))
-            rieman1 = Qtree[n,1] / Ax1 - 4.0 * tsq1 * (sqrt(sqrt(Ax1)) - sqrt(sqrt(Ax10))) # sqrt(tbeta1 * roi / 2.0 / Ax10) * ((Ax1 ** 0.25) - (Ax10 ** 0.25))
+            rieman0 = Qtree[n, 0] / Ax0 - 4.0 * tsq0 * (sqrt(sqrt(Ax0)) - sqrt(sqrt(Ax00)))
+            rieman1 = Qtree[n, 1] / Ax1 - 4.0 * tsq1 * (sqrt(sqrt(Ax1)) - sqrt(sqrt(Ax10)))
+
             W2[n] = (rieman0 - rieman1) * (dx - x_d_t) / dx + rieman1
-            Qguess[n] = 2.0 * Qtreem[n,j+1] - Qtreem[n,j+2] # Qguess = 2*Q(i+1) - Q(i+2)
+            Qguess[n] = 2.0 * Qtreem[n, j + 1] - Qtreem[n, j + 2]
 
-            A_term1[n] = (2.0 * sqrt(A0[n,j]) / tbeta[n,j] / roi) ** 2
-            remuda0[n] = sqrt(tbeta[n,j] * roi * 0.5)
+            A_term1[n] = (2.0 * sqrt(A0[n, j]) / tbeta[n, j] / roi) ** 2
+            remuda0[n] = sqrt(tbeta[n, j] * roi * 0.5)
 
-        elif mbif_par[n,0] in [0,4]: # terminal arteries
+        elif mbif_par[n, 0] in [0, 4]:
             j = imaxtree[n]
-            Ax0 = Atree[n,j-1]
-            Ax00 = A0[n,j-1]
-            Ax1 = Atree[n,j]
-            Ax10 = A0[n,j]
-            #tbeta0 = (Ek1 * exp(Ek2 * Rtree0[j - 1,n]) + Ek3) * sqrt(Ax00) * cof_ela[n]
-            tbeta0 = tbeta[n,j-1] * sqrt(Ax00)
-            tsq0 = sqrt(tbeta0 * roi * 0.5 / Ax00) 
-            #tbeta1 = (Ek1 * exp(Ek2 * Rtree0[j,n]) + Ek3) * sqrt(Ax10) * cof_ela[n]
-            tbeta1 = tbeta[n,j] * sqrt(Ax10)
-            tsq1 = sqrt(tbeta1 * roi * 0.5 / Ax10) 
-            remd0 = Qtree[n,j-1] / Ax0 + tsq0 * sqrt(sqrt(Ax0))
-            remd1 = Qtree[n,j] / Ax1 + tsq1 * sqrt(sqrt(Ax1))
+            Ax0 = Atree[n, j - 1]
+            Ax00 = A0[n, j - 1]
+            Ax1 = Atree[n, j]
+            Ax10 = A0[n, j]
+
+            # Debug checks
+            if Ax0 <= 0 or Ax00 <= 0 or Ax1 <= 0 or Ax10 <= 0:
+                print("ERROR Qguesscal n=", n, ": Zero area. Ax0:", Ax0, "Ax00:", Ax00, "Ax1:", Ax1, "Ax10:", Ax10)
+            if dx == 0:
+                print("ERROR Qguesscal n=", n, ": dx is zero.")
+            if tbeta[n, j] == 0:
+                print("ERROR Qguesscal n=", n, ": tbeta is zero.")
+
+            tbeta0 = tbeta[n, j - 1] * sqrt(Ax00)
+            tsq0 = sqrt(tbeta0 * roi * 0.5 / Ax00)
+            tbeta1 = tbeta[n, j] * sqrt(Ax10)
+            tsq1 = sqrt(tbeta1 * roi * 0.5 / Ax10)
+            remd0 = Qtree[n, j - 1] / Ax0 + tsq0 * sqrt(sqrt(Ax0))
+            remd1 = Qtree[n, j] / Ax1 + tsq1 * sqrt(sqrt(Ax1))
             x_d_t = (remd0 + remd1) * 0.5 * dt
-            rieman0 = Qtree[n,j-1] / Ax0 + 4.0 * tsq0 * (sqrt(sqrt(Ax0)) - sqrt(sqrt(Ax00))) # sqrt(tbeta0 * roi / 2.0 / Ax00) * ((Ax0 ** 0.25) - (Ax00 ** 0.25))
-            rieman1 = Qtree[n,j] / Ax1 + 4.0 * tsq1 * (sqrt(sqrt(Ax1)) - sqrt(sqrt(Ax10))) # sqrt(tbeta1 * roi / 2.0 / Ax10) * ((Ax1 ** 0.25) - (Ax10 ** 0.25))
+            rieman0 = Qtree[n, j - 1] / Ax0 + 4.0 * tsq0 * (sqrt(sqrt(Ax0)) - sqrt(sqrt(Ax00)))
+            rieman1 = Qtree[n, j] / Ax1 + 4.0 * tsq1 * (sqrt(sqrt(Ax1)) - sqrt(sqrt(Ax10)))
             W1[n] = (rieman1 - rieman0) * (dx - x_d_t) / dx + rieman0
-            Qguess[n] = 2.0 * Qtreem[n,j-1] - Qtreem[n,j-2] # Qguess = 2*Q(i-1) - Q(i-2)
-            
-            A_term1[n] = (2.0 * sqrt(A0[n,j]) / tbeta[n,j] / roi) ** 2
-            remuda0[n] = sqrt(tbeta[n,j] * roi * 0.5)
+            Qguess[n] = 2.0 * Qtreem[n, j - 1] - Qtreem[n, j - 2]
+
+            A_term1[n] = (2.0 * sqrt(A0[n, j]) / tbeta[n, j] / roi) ** 2
+            remuda0[n] = sqrt(tbeta[n, j] * roi * 0.5)
 
         else:
             continue
 
     return Qguess, W1, W2, A_term1, remuda0
 
+
 @njit(fastmath=True)
-def Crattocal(nartery,mbif_par,imaxtree,P1u,tbeta,A0,roi,Qguess,Dif_ratio,
-              W1,W2,q,A_temp,Q_temp,C_ratto,Avalve,A_term1,remuda0):
+def Crattocal(nartery, mbif_par, imaxtree, P1u, tbeta, A0, roi, Qguess, Dif_ratio,
+              W1, W2, q, A_temp, Q_temp, C_ratto, Avalve, A_term1, remuda0):
+    for n in range(1, nartery + 1):
 
-    for n in range(1,nartery + 1):
-
-        if n == 1: # aorta
-
+        if n == 1:
             j = 0
-            A_temp_temp = P1u[n] / tbeta[n,j] + 1.0
-            A_temp[n] = A0[n,j] * (A_temp_temp ** 2)
-            # A_term1 = (2.0 * sqrt(A0[n,j]) / tbeta[n,j] / roi) ** 2.0
-            # remuda0 = sqrt(tbeta[n,j] * roi / 2.0) # remuda0=dsqrt(tbeta(j,n,0)*roi/2.0/dsqrt(A0(j,n)))*(A0(j,n)**0.25) 
+            if tbeta[n, j] == 0:
+                print("ERROR Crattocal n=1: tbeta is zero.")
+
+            A_temp_temp = P1u[n] / tbeta[n, j] + 1.0
+            A_temp[n] = A0[n, j] * (A_temp_temp ** 2)
+
+            if A_term1[n] <= 0:
+                print("ERROR Crattocal n=1: A_term1 is zero or negative:", A_term1[n])
+
             A_t = sqrt(sqrt(A_temp[n] / A_term1[n]))
             W1[n] = W2[n] + (A_t - remuda0[n]) * 8.0
-            Q_temp[n] = A_temp[n] * (W1[n] + W2[n]) * 0.5 # Q(n+1) = A(n+1) * U(n+1)
+            Q_temp[n] = A_temp[n] * (W1[n] + W2[n]) * 0.5
             converge_c = Q_temp[n] - Qguess[n]
             if q[6] <= 0.0:
-                Avalve[0] = 0.0 # aav
+                Avalve[0] = 0.0
 
-            # for debug
-            # print(f"n = {n}, W1 = {W1[n]}, Aterm1 = {A_term1}, remuda0 = {remuda0}, A_temp = {A_temp[n]}")
-
-        elif mbif_par[n,0] in [0,4]: # terminal arteries
+        elif mbif_par[n, 0] in [0, 4]:
 
             j = imaxtree[n]
-            A_temp_temp = P1u[n] / tbeta[n,j] + 1.0
-            A_temp[n] = A0[n,j] * (A_temp_temp ** 2)
-            # A_term1 = (2.0 * sqrt(A0[n,j]) / tbeta[n,j] / roi) ** 2.0
-            # remuda0 = sqrt(tbeta[n,j] * roi / 2.0) # remuda0=dsqrt(tbeta(j,n,0)*roi/2.0/dsqrt(A0(j,n)))*(A0(j,n)**0.25)
+            if tbeta[n, j] == 0:
+                print("ERROR Crattocal n=", n, ": tbeta is zero.")
+
+            A_temp_temp = P1u[n] / tbeta[n, j] + 1.0
+            A_temp[n] = A0[n, j] * (A_temp_temp ** 2)
+
+            if A_term1[n] <= 0:
+                print("ERROR Crattocal n=", n, ": A_term1 is zero or negative:", A_term1[n])
+
             A_t = sqrt(sqrt(A_temp[n] / A_term1[n]))
             W2[n] = W1[n] - (A_t - remuda0[n]) * 8.0
-            Q_temp[n] = A_temp[n] * (W1[n] + W2[n]) * 0.5 # Q(n+1) = A(n+1) * U(n+1)
+            Q_temp[n] = A_temp[n] * (W1[n] + W2[n]) * 0.5
             converge_c = Q_temp[n] - Qguess[n]
 
-            # for debug
-            # print(f"n = {n}, W2 = {W2[n]}, Aterm1 = {A_term1}, remuda0 = {remuda0}, A_temp = {A_temp[n]}")
-
-        else: 
+        else:
             continue
 
         if abs(Qguess[n]) == 0.0:
             Dif_ratio[n] = 0.0
         else:
+            # Check for safety even though the if-statement handles it
+            if Qguess[n] == 0:
+                print("ERROR Crattocal n=", n, ": Qguess is zero during Dif_ratio calculation.")
             Dif_ratio[n] = abs(converge_c) / abs(Qguess[n])
 
-        # for debug
-        # print(f"n = {n}, Dif_ratio[{n}] = {Dif_ratio[n]}, abs(converge_c) = {abs(converge_c)}, abs(Qguess[{n}]) = {abs(Qguess[n])}")
-
-        C_ratto += Dif_ratio[n] # calculate the total difference ratio
+        C_ratto += Dif_ratio[n]
 
     return C_ratto, Avalve
 

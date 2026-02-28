@@ -31,6 +31,8 @@ PAST FORTRAN VERSIONS
         Code is rearranged for calculation speed improvement           
     VERSION 3.0.0 2017.07.24   
 '''
+import pstats
+from pstats import SortKey
 
 # import modules
 import numpy as np
@@ -41,6 +43,7 @@ from datetime import datetime
 import os
 import sys
 from scipy.optimize import minimize
+import cProfile
 
 # parameter/module initialization
 import zerod as zd # import parameters and functions for 1D interface
@@ -101,6 +104,7 @@ CoWmeasuredCSV = "CoW_measured.csv"
 stenosisCSV = "Stenosis.csv"
 PS_geometryCSV = "PS_geometry.csv"
 R_comCSV = "R_com_adjusted.csv"
+CoW_Rtotal_CSV = "CoW_Rtotal_input.csv" # The new file containing 6 R_total values
 
 #computaion conditions (CalParam.csv)
 file_path = folderCSV + calParamCSV
@@ -139,6 +143,7 @@ with open(file_path, mode='r', encoding='utf-8') as file:
     vsurg_stn_qap_init = int(next(reader)[1]) # Initialize virtual surgery with previous results?,0: No,1: Yes
     sim_LMA = int(next(reader)[1]) # Simulate 0d model with Couple-Lumped/Detailed LMA models?,0: No,1: Yes;Lumped,2: Yes;Detailed
     RLMA_calc = int(next(reader)[1]) # Method of calculating RLMA?,0: Set values from Artery.csv,1: Use Thomas vasculature
+    RCoW_read = int(next(reader)[1]) # Read prescribed cerebral PR from external file? 0:No, 1: Yes
     temp = next(reader)
     cow_geo = int(temp[1]) # Type of CoW geometry,0: Complete,1: ACom,2: Rt. ACA1,3: Lt.ACA1,4: Rt. Pcom,5: Lt. PCom,6: Both PComs,7: Rt. PCA1,8: Lt. PCA1,9: Rt. PCom/Lt. PCA1,10: Lt.PCom/Rt. PCA1
     cow_geo_name = temp[cow_geo+4] # Name of CoW geometry
@@ -554,6 +559,26 @@ if r_com_read == 1: # read
 
 else: # don't read
     print("Didn't read adjusted radii of communicating arteries from R_com_adjusted.csv. Use default values. (r_com_read=0)")
+
+if RCoW_read == 1:
+    file_path = folderCSV + CoW_Rtotal_CSV
+    new_R_totals = {}
+
+    with open(file_path, mode='r', encoding='utf-8') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            artery_id = int(row['Artery no.'])
+            rtotal_val = float(row['R_total'])
+            new_R_totals[artery_id] = rtotal_val
+
+    for i in range(6):
+        arteryno = n_CoW[i]
+        # Overwrite the total resistance in RCtree
+        if arteryno in new_R_totals:
+            RCtree[arteryno, 0] = new_R_totals[arteryno]
+            print(f"  Artery {arteryno}: R_total = {RCtree[arteryno, 0]:.4f}")
+
+    print("Read R_total of peripheral regions from CoW_Rtotal_input.csv")
 
 # Read stenosis parameters (Stenosis.csv)
 
@@ -1055,7 +1080,7 @@ PR_AdjustedCoWoutletcsv = output_directory + "PR_Adjusted_CoW_outlet.csv"
 with open(PR_AdjustedCoWoutletcsv, mode='w', newline='', encoding = 'utf-8') as file:
     writer = csv.writer(file)
     row = ["cyclo no.","Relative error"]
-    for i in [58,70,61,67,63,65]:
+    for i in [58,61,63,65,67,70]:
         row.append(f"{i} {artery_name[i,1]} Rtotal[mmHg*s/ml]")
         row.append(f"{i} R1[mmHg*s/ml]")
         row.append(f"{i} R2[mmHg*s/ml]")
@@ -1473,22 +1498,25 @@ nnn = nbegin # initialize
 # for hot start, edited by Thomas 240226
 checkpoint_file = "simulation_checkpoint.npz"
 
-if os.path.exists(checkpoint_file):
-    print(">>> Found previous run state. Overwriting zeros for hot-start...")
-    data = np.load(checkpoint_file)
+# if os.path.exists(checkpoint_file):
+#     print(">>> Found previous run state. Overwriting zeros for hot-start...")
+#     data = np.load(checkpoint_file)
+#
+#     # Fill the arrays you just initialized with the saved data
+#     Qtree[:] = data['Qtree']
+#     Atree[:] = data['Atree']
+#     Utree[:] = data['Utree']
+#     Ptree[:] = data['Ptree']
+#     Vtree0d[:] = data['Vtree0d']
+#     Qtree0d[:] = data['Qtree0d']
+#     result[:] = data['result']
+#     RLCtree[:] = data['RLCtree']
+#
+# else:
+#     print(">>> No previous run state found. Starting with fresh initialization...")
 
-    # Fill the arrays you just initialized with the saved data
-    Qtree[:] = data['Qtree']
-    Atree[:] = data['Atree']
-    Utree[:] = data['Utree']
-    Ptree[:] = data['Ptree']
-    Vtree0d[:] = data['Vtree0d']
-    Qtree0d[:] = data['Qtree0d']
-    result[:] = data['result']
-    RLCtree[:] = data['RLCtree']
-
-else:
-    print(">>> No previous run state found. Starting with fresh initialization...")
+profiler = cProfile.Profile()
+profiler.enable()
 
 while nnn < nlast + 1: # time step loop
 
@@ -1503,14 +1531,14 @@ while nnn < nlast + 1: # time step loop
     # print(f"Time step: {nnn}")
 
     # # Merged Lax-Wendroff calculation
-    [Atreem, Ptreem, Utreem, Qtreem] = lw.LaxWendroff(nartery, imaxtree, visc_kr,
-                    Atree, Atreem1, A0, inv_A0mid, Utree, Utreem1,
-                    tbeta, tbetamid, p0, Atreem, Ptreem, Qtreem, Utreem, dt, dxi, roi, fr,
-                    cow_geo, exclude_artery)
+    # [Atreem, Ptreem, Utreem, Qtreem] = lw.LaxWendroff(nartery, imaxtree, visc_kr,
+    #                 Atree, Atreem1, A0, inv_A0mid, Utree, Utreem1,
+    #                 tbeta, tbetamid, p0, Atreem, Ptreem, Qtreem, Utreem, dt, dxi, roi, fr,
+    #                 cow_geo, exclude_artery)
     
     # alternative
-    # [Atreem, Ptreem, Utreem, Qtreem] = lw.LaxWendroff_opt(nartery, imaxtree, visc_kr, Atree, Atreem1, A0, inv_A0mid, Utree, Utreem1,
-    #                 tbeta, tbetamid, p0, Atreem, Ptreem, Qtreem, Utreem, dt, dxi, roi, fr, cow_geo, exclude_artery)
+    [Atreem, Ptreem, Utreem, Qtreem] = lw.LaxWendroff_opt(nartery, imaxtree, visc_kr, Atree, Atreem1, A0, inv_A0mid, Utree, Utreem1,
+                    tbeta, tbetamid, p0, Atreem, Ptreem, Qtreem, Utreem, dt, dxi, roi, fr, cow_geo, exclude_artery)
 
     # measure time for 1D Lax-Wendroff calculation
     t_end = perf_counter() # obtain time
@@ -1985,12 +2013,12 @@ while nnn < nlast + 1: # time step loop
                 row = [LMAno, RLCtree[2,LMAno,1], RLCtree[2,LMAno,2], RLCtree[2,LMAno,3], 1.0 / RLCtree[3,LMAno,1], 1.0 / RLCtree[1,LMAno,2]]
                 writer.writerow(row)
 
-        # for hot start, edited by Thomas 240226
-        np.savez(checkpoint_file,
-                 Qtree=Qtree, Atree=Atree, Utree=Utree, Ptree=Ptree,
-                 Vtree0d=Vtree0d, Qtree0d=Qtree0d, result=result, RLCtree=RLCtree)
-        print(f">>> Hot-start state saved to {checkpoint_file}")
-    
+        # # for hot start, edited by Thomas 240226
+        # np.savez(checkpoint_file,
+        #          Qtree=Qtree, Atree=Atree, Utree=Utree, Ptree=Ptree,
+        #          Vtree0d=Vtree0d, Qtree0d=Qtree0d, result=result, RLCtree=RLCtree)
+        # print(f">>> Hot-start state saved to {checkpoint_file}")
+        #
     # output visualization data
     if ((visualization == 1 and (nnn >= viz_str * nduration and nnn <= viz_end * nduration)) or (visualization == 2 and (nnn >= nlast-nduration and nnn <= nlast))):
 
@@ -2388,6 +2416,19 @@ while nnn < nlast + 1: # time step loop
         print(f"finished step no.{nnn}")
 
     nnn += 1 # increment the time step
+
+profiler.disable()
+
+# Create a Stats object
+stats = pstats.Stats(profiler)
+
+# Sort by total time and print the top 5
+print("Top 20 functions by total time:")
+stats.sort_stats(SortKey.TIME).print_stats(20)
+
+# Sort by average time and print the top 5
+print("\nTop 20 functions by average time per call:")
+stats.sort_stats(SortKey.CALLS).print_stats(20)
 
 # close log file
 sys.stdout.flush() # flush stdout before closing the log file
