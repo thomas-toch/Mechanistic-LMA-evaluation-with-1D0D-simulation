@@ -847,7 +847,7 @@ if sim_LMA == 1:
     for i in range(6):
         arteryno = n_CoW[i]
         R_total = RCtree[arteryno,0] # total resistance of wk3 (literature data)
-        RLCtree[2,arteryno,3] = R_total * 0.2 # R3 = 1/5*R_total
+        RLCtree[2,arteryno,3] = R_total * 0.8 # R3 = 1/5*R_total
         R_total_wk = R_total - RLCtree[2,arteryno,3] # total resistance of wk3 - R3
         RLCtree[2,arteryno,1] = R_total_wk * 0.2 # R1 = 1/5*RT_wk
         RLCtree[2,arteryno,2] = R_total_wk * 0.8 # R2 = 4/5*RT_wk
