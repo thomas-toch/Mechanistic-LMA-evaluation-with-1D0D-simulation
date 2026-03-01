@@ -144,6 +144,7 @@ with open(file_path, mode='r', encoding='utf-8') as file:
     sim_LMA = int(next(reader)[1]) # Simulate 0d model with Couple-Lumped/Detailed LMA models?,0: No,1: Yes;Lumped,2: Yes;Detailed
     RLMA_calc = int(next(reader)[1]) # Method of calculating RLMA?,0: Set values from Artery.csv,1: Use Thomas vasculature
     RCoW_read = int(next(reader)[1]) # Read prescribed cerebral PR from external file? 0:No, 1: Yes
+    PR_autoreg = int(next(reader)[1]) #Activate autoregulation? (Requires RCoW_read == 1)
     temp = next(reader)
     cow_geo = int(temp[1]) # Type of CoW geometry,0: Complete,1: ACom,2: Rt. ACA1,3: Lt.ACA1,4: Rt. Pcom,5: Lt. PCom,6: Both PComs,7: Rt. PCA1,8: Lt. PCA1,9: Rt. PCom/Lt. PCA1,10: Lt.PCom/Rt. PCA1
     cow_geo_name = temp[cow_geo+4] # Name of CoW geometry
@@ -202,6 +203,8 @@ print ("vsurg_stn = ", vsurg_stn)
 print ("vsurg_stn_qap_init = ", vsurg_stn_qap_init)
 print ("sim_LMA = ", sim_LMA)
 print ("RLMA_calc = ", RLMA_calc)
+print ('RCoW_read = ', RCoW_read)
+print ('PR_autoreg = ', PR_autoreg)
 print ("cow_geo = ", cow_geo)
 print ("cow_geo_name = ", cow_geo_name)
 print ("adjust_stn_effect = ", adjust_stn_effect)
@@ -1498,22 +1501,22 @@ nnn = nbegin # initialize
 # for hot start, edited by Thomas 240226
 checkpoint_file = "simulation_checkpoint.npz"
 
-# if os.path.exists(checkpoint_file):
-#     print(">>> Found previous run state. Overwriting zeros for hot-start...")
-#     data = np.load(checkpoint_file)
-#
-#     # Fill the arrays you just initialized with the saved data
-#     Qtree[:] = data['Qtree']
-#     Atree[:] = data['Atree']
-#     Utree[:] = data['Utree']
-#     Ptree[:] = data['Ptree']
-#     Vtree0d[:] = data['Vtree0d']
-#     Qtree0d[:] = data['Qtree0d']
-#     result[:] = data['result']
-#     RLCtree[:] = data['RLCtree']
-#
-# else:
-#     print(">>> No previous run state found. Starting with fresh initialization...")
+if os.path.exists(checkpoint_file):
+    print(">>> Found previous run state. Overwriting zeros for hot-start...")
+    data = np.load(checkpoint_file)
+
+    # Fill the arrays you just initialized with the saved data
+    Qtree[:] = data['Qtree']
+    Atree[:] = data['Atree']
+    Utree[:] = data['Utree']
+    Ptree[:] = data['Ptree']
+    Vtree0d[:] = data['Vtree0d']
+    Qtree0d[:] = data['Qtree0d']
+    result[:] = data['result']
+    RLCtree[:] = data['RLCtree']
+
+else:
+    print(">>> No previous run state found. Starting with fresh initialization...")
 
 profiler = cProfile.Profile()
 profiler.enable()
@@ -1790,6 +1793,60 @@ while nnn < nlast + 1: # time step loop
             rel_err_LMA = 0.0
             rel_err_SPECT = 0.0
 
+        # --- Autoregulation Regulation Block ---
+        # Only execute if Autoregulation is toggled ON
+        # AND if we are using prescribed/read resistance (not flow-tuning)
+
+        # Map: [R-MCA, R-ACA, R-PCA, L-PCA, L-ACA, L-MCA]
+        # Values obtained from baseline run (geometry == 0, mstn == 0, prescribed perfusion, non-PS pressures)
+        P_mid_values = {
+            58: 57.67804161,
+            61: 61.15975815,
+            63: 63.73726108,
+            65: 63.72578235,
+            67: 58.42313162,
+            70: 61.1845962
+        }
+
+        if PR_autoreg == 1 and RCoW_read == 1:
+
+            for i in range(0, 6):
+                arteryno = n_CoW[i]
+
+                # 1. Get the Mean Pressure [mmHg]
+                P_mean = Ptree0dmean[arteryno, cycle_no]
+
+                # 2. Ursino Parameters (1998)
+                k_sens = 0.05
+                r_min_ratio = 0.85
+                r_max_ratio = 1.25
+
+                # Use the calibrated set-point for this specific artery
+                P_target = P_mid_values[arteryno]
+
+                # 3. Calculate Radius Ratio (Sigmoid)
+                exponent = -k_sens * (P_mean - P_target)
+                r_ratio = r_min_ratio + (r_max_ratio - r_min_ratio) / (1.0 + math.exp(exponent))
+
+                # 4. Calculate Resistance Multiplier (Poiseuille)
+                R_mult = 1.0 / (r_ratio ** 4)
+
+                # 5. Apply to the Base Geometric Resistance
+                # R_base is stored in RCtree[arteryno, 0]
+                R_base = RCtree[arteryno, 0]
+
+                if sim_LMA == 0:
+                    # Change R2 (Distal) for non-LMA models
+                    RLCtree[2, arteryno, 2] = R_base * R_mult
+                    # Optional: Print for monitoring mechanistic shifts
+                    print(f"Art {arteryno}: P={P_mean:.1f} -> R_new={RLCtree[2, arteryno, 2]:.2e}")
+
+                else:
+                    # Change R3 (Distal) for LMA models
+                    RLCtree[2, arteryno, 3] = R_base * R_mult
+                    # Optional: Print for monitoring mechanistic shifts
+                    print(f"Art {arteryno}: P={P_mean:.1f} -> R_new={RLCtree[2, arteryno, 3]:.2e}")
+
         # if all converged, set if_conv = 1, else if_conv = 0
         if conv_all == 1 and conv_p17 == 1 and conv_cerebral_4dflow == 1 and conv_cerebral_SPECT == 1 and conv_LMA == 1:
             if_conv = 1
@@ -2013,12 +2070,12 @@ while nnn < nlast + 1: # time step loop
                 row = [LMAno, RLCtree[2,LMAno,1], RLCtree[2,LMAno,2], RLCtree[2,LMAno,3], 1.0 / RLCtree[3,LMAno,1], 1.0 / RLCtree[1,LMAno,2]]
                 writer.writerow(row)
 
-        # # for hot start, edited by Thomas 240226
-        # np.savez(checkpoint_file,
-        #          Qtree=Qtree, Atree=Atree, Utree=Utree, Ptree=Ptree,
-        #          Vtree0d=Vtree0d, Qtree0d=Qtree0d, result=result, RLCtree=RLCtree)
-        # print(f">>> Hot-start state saved to {checkpoint_file}")
-        #
+        # for hot start, edited by Thomas 240226
+        np.savez(checkpoint_file,
+                 Qtree=Qtree, Atree=Atree, Utree=Utree, Ptree=Ptree,
+                 Vtree0d=Vtree0d, Qtree0d=Qtree0d, result=result, RLCtree=RLCtree)
+        print(f">>> Hot-start state saved to {checkpoint_file}")
+
     # output visualization data
     if ((visualization == 1 and (nnn >= viz_str * nduration and nnn <= viz_end * nduration)) or (visualization == 2 and (nnn >= nlast-nduration and nnn <= nlast))):
 
@@ -2074,11 +2131,15 @@ while nnn < nlast + 1: # time step loop
             row = [cycle_no, rel_err_QCoWOut]
             for i in range(0,6):
                 arteryno = n_CoW[i] # artery no. of the CoW
-                row.append(RLCtree[2,arteryno,1] + RLCtree[2,arteryno,2])
-                row.append(RLCtree[2,arteryno,1])
-                row.append(RLCtree[2,arteryno,2])
                 if sim_LMA == 1:
-                    row.append(RLCtree[2,arteryno,3])
+                    row.append(RLCtree[2,arteryno,1] + RLCtree[2,arteryno,2] + RLCtree[2,arteryno,3])
+                    row.append(RLCtree[2, arteryno, 1])
+                    row.append(RLCtree[2, arteryno, 2])
+                    row.append(RLCtree[2, arteryno, 3])
+                elif sim_LMA == 0:
+                    row.append(RLCtree[2, arteryno, 1] + RLCtree[2, arteryno, 2])
+                    row.append(RLCtree[2, arteryno, 1])
+                    row.append(RLCtree[2, arteryno, 2])
             if sim_LMA == 1:
                 for i in range(numlma):
                     LMAno = 84+i
