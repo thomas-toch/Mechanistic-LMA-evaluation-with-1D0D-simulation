@@ -144,12 +144,14 @@ with open(file_path, mode='r', encoding='utf-8') as file:
     sim_LMA = int(next(reader)[1]) # Simulate 0d model with Couple-Lumped/Detailed LMA models?,0: No,1: Yes;Lumped,2: Yes;Detailed
     RLMA_calc = int(next(reader)[1]) # Method of calculating RLMA?,0: Set values from Artery.csv,1: Use Thomas vasculature
     RCoW_read = int(next(reader)[1]) # Read prescribed cerebral PR from external file? 0:No, 1: Yes
-    PR_autoreg = int(next(reader)[1]) #Activate autoregulation? (Requires RCoW_read == 1)
+    PR_autoreg = int(next(reader)[1]) # Activate autoregulation? (Requires RCoW_read == 1) 0:No, 1: Yes
     temp = next(reader)
     cow_geo = int(temp[1]) # Type of CoW geometry,0: Complete,1: ACom,2: Rt. ACA1,3: Lt.ACA1,4: Rt. Pcom,5: Lt. PCom,6: Both PComs,7: Rt. PCA1,8: Lt. PCA1,9: Rt. PCom/Lt. PCA1,10: Lt.PCom/Rt. PCA1
     cow_geo_name = temp[cow_geo+4] # Name of CoW geometry
     adjust_stn_effect = int(next(reader)[1]) # Adjust stenosis effect?,0: No,1: Yes(Emphasize)
     simplified_output = int(next(reader)[1]) # Simplifiy output files? (Only will output mean data stc.),0: No,1: Yes
+    hot_start_load = int(next(reader)[1]) # Initialise with previous results (updated by Thomas 032526)? 0:No, 1: Yes
+    hot_start_save = int(next(reader)[1]) # Save previous results? (updated by Thomas 032526) 0:No, 1: Yes
     headers = [next(reader) for _ in range(3)] # skip
     ro = float(next(reader)[1]) #  density [kg/m^3]
     frm = float(next(reader)[1]) # viscosity coefficient [Pa.s]
@@ -209,6 +211,8 @@ print ("cow_geo = ", cow_geo)
 print ("cow_geo_name = ", cow_geo_name)
 print ("adjust_stn_effect = ", adjust_stn_effect)
 print ("simplified_output = ", simplified_output)
+print ("hot_start_load = ", hot_start_load)
+print ("hot_start_save = ", hot_start_save)
 print ("ro = ", ro)
 print ("frm = ", frm)
 print ("age = ", age)
@@ -563,26 +567,6 @@ if r_com_read == 1: # read
 else: # don't read
     print("Didn't read adjusted radii of communicating arteries from R_com_adjusted.csv. Use default values. (r_com_read=0)")
 
-if RCoW_read == 1:
-    file_path = folderCSV + CoW_Rtotal_CSV
-    new_R_totals = {}
-
-    with open(file_path, mode='r', encoding='utf-8') as file:
-        reader = csv.DictReader(file)
-        for row in reader:
-            artery_id = int(row['Artery no.'])
-            rtotal_val = float(row['R_total'])
-            new_R_totals[artery_id] = rtotal_val
-
-    for i in range(6):
-        arteryno = n_CoW[i]
-        # Overwrite the total resistance in RCtree
-        if arteryno in new_R_totals:
-            RCtree[arteryno, 0] = new_R_totals[arteryno]
-            print(f"  Artery {arteryno}: R_total = {RCtree[arteryno, 0]:.4f}")
-
-    print("Read R_total of peripheral regions from CoW_Rtotal_input.csv")
-
 # Read stenosis parameters (Stenosis.csv)
 
 #initialize temporal arrays
@@ -870,16 +854,58 @@ for j in range(nartery+1, nartery+numlma+1):
     RLCtree[2,j,1] = RCtree[j,0] # R of the first node [mmHg.s/ml]
     RLCtree[1,j,2] = 1.0 / RCtree[j,2] # 1 / L of the second node [mmHg.s^2/ml]
 
-# adjust R1,R2,R3 for Cow arteries if sim_LMA == 1
-if sim_LMA == 1:
+# Check if we should read R1, R2, R3 directly from CSV
+if sim_LMA == 1 and RCoW_read == 1:
+    file_path = folderCSV + CoW_Rtotal_CSV
+    new_R_values = {}
+
+    with open(file_path, mode='r', encoding='utf-8') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            artery_id = int(row['Artery no.'])
+            new_R_values[artery_id] = {
+                'R1': float(row['R1']),
+                'R2': float(row['R2']),
+                'R3': float(row['R3'])
+            }
+
     for i in range(6):
         arteryno = n_CoW[i]
-        R_total = RCtree[arteryno,0] # total resistance of wk3 (literature data)
-        RLCtree[2,arteryno,3] = R_total * 0.8 # R3 = 1/5*R_total
-        R_total_wk = R_total - RLCtree[2,arteryno,3] # total resistance of wk3 - R3
-        RLCtree[2,arteryno,1] = R_total_wk * 0.2 # R1 = 1/5*RT_wk
-        RLCtree[2,arteryno,2] = R_total_wk * 0.8 # R2 = 4/5*RT_wk
-        print(f"Initial R of the third node of artery no.{arteryno} R1 = {RLCtree[2,arteryno,1]}, R2 = {RLCtree[2,arteryno,2]}, R3 = {RLCtree[2,arteryno,3]} mmHg.s/ml")
+        if arteryno in new_R_values:
+            # 1. Store Baseline Values in indices 4 and 5 (The "Vault")
+            RLCtree[2, arteryno, 4] = new_R_values[arteryno]['R3']  # Original R3
+
+            # 2. Direct assignment to active working indices (1, 2, 3)
+            RLCtree[2, arteryno, 1] = new_R_values[arteryno]['R1']
+            RLCtree[2, arteryno, 2] = new_R_values[arteryno]['R2']
+            RLCtree[2, arteryno, 3] = new_R_values[arteryno]['R3']
+
+            # Update RCtree total resistance for consistency
+            RCtree[arteryno, 0] = RLCtree[2, arteryno, 1] + RLCtree[2, arteryno, 2] + RLCtree[2, arteryno, 3]
+
+            print(
+                f"Artery {arteryno} assigned: R1={RLCtree[2, arteryno, 1]}, R2={RLCtree[2, arteryno, 2]}, R3={RLCtree[2, arteryno, 3]}")
+            print(f"  -> Baseline R3 stored in index [4]: {RLCtree[2, arteryno, 4]}")
+
+    print("Finished reading R1, R2, and R3 from CSV.")
+
+# Fallback: Original logic if we are NOT reading from CSV but sim_LMA is active
+elif sim_LMA == 1:
+    for i in range(6):
+        arteryno = n_CoW[i]
+        R_total = RCtree[arteryno, 0]
+
+        # Calculate working values
+        RLCtree[2, arteryno, 3] = R_total * 0.8
+        R_total_wk = R_total - RLCtree[2, arteryno, 3]
+        RLCtree[2, arteryno, 1] = R_total_wk * 0.2
+        RLCtree[2, arteryno, 2] = R_total_wk * 0.8
+
+        # Store baseline even in calculation mode for consistency
+        RCtree[arteryno, 0] = RLCtree[2, arteryno, 1] + RLCtree[2, arteryno, 2] + RLCtree[2, arteryno, 3]
+
+        print(
+            f"Calculated R for artery {arteryno}: R1={RLCtree[2, arteryno, 1]}, R2={RLCtree[2, arteryno, 2]}, R3={RLCtree[2, arteryno, 3]}")
 
 # set params from PPIC.csv if ppic_peripheral_params == 1
 if init_peri_params == 1:
@@ -1174,7 +1200,7 @@ PPICcsv = output_directory_newinitial + "PPIC_new.csv"
 # Array and time step Initialization
 
 # calculating number of time steps
-nduration = int(Tduration / dt) # total time step in each cardiac cycle (Tduration: cardiac cycle duration [s])
+nduration = int(round(Tduration / dt)) # total time step in each cardiac cycle (Tduration: cardiac cycle duration [s])
 nlast = nofduration * nduration # total time step in the simulation (nofduration: number of cardiac cycles to compute)
 print(f"dt = {dt} [s]\nnduration: no. of cardiac cycles to compute = {nduration}\nnlast: total time step in the simulation = {nlast}")
 
@@ -1498,28 +1524,38 @@ print("********************Start calculation loop********************")
 nbegin = 1
 nnn = nbegin # initialize
 
-# for hot start, edited by Thomas 240226
-checkpoint_file = "simulation_checkpoint.npz"
+checkpoint_file_load = "simulation_checkpoint_super_dtdx.npz"
+checkpoint_file_save = "simulation_checkpoint_super_dtdx.npz"
 
-if os.path.exists(checkpoint_file):
-    print(">>> Found previous run state. Overwriting zeros for hot-start...")
-    data = np.load(checkpoint_file)
+if hot_start_load == 1:
+    # for hot start, edited by Thomas 240226
+    if os.path.exists(checkpoint_file_load):
+        print(">>> Found previous run state. Overwriting zeros for hot-start...")
+        data = np.load(checkpoint_file_load)
 
-    # Fill the arrays you just initialized with the saved data
-    Qtree[:] = data['Qtree']
-    Atree[:] = data['Atree']
-    Utree[:] = data['Utree']
-    Ptree[:] = data['Ptree']
-    Vtree0d[:] = data['Vtree0d']
-    Qtree0d[:] = data['Qtree0d']
-    result[:] = data['result']
-    RLCtree[:] = data['RLCtree']
+        # Fill the arrays we just initialized with the saved data
+        Qtree[:] = data['Qtree']
+        Atree[:] = data['Atree']
+        Utree[:] = data['Utree']
+        Ptree[:] = data['Ptree']
+        Vtree0d[:] = data['Vtree0d']
+        Qtree0d[:] = data['Qtree0d']
+        result[:] = data['result']
+        RLCtree[:] = data['RLCtree']
+        Atreem1[:] = data['Atreem1']
+        Utreem1[:] = data['Utreem1']
+        v[:] = data['v']
+        dv[:] = data['dv']
+        q[:] = data['q']
+        dvq[:] = data['dvq']
 
+    else:
+        print(">>> No previous run state found. Starting with fresh initialization...")
 else:
-    print(">>> No previous run state found. Starting with fresh initialization...")
+    print(">>> Hot start toggled off. Starting with fresh initialization...")
 
-profiler = cProfile.Profile()
-profiler.enable()
+# profiler = cProfile.Profile()
+# profiler.enable()
 
 while nnn < nlast + 1: # time step loop
 
@@ -1616,7 +1652,7 @@ while nnn < nlast + 1: # time step loop
 
     t_str = perf_counter() # obtain time
 
-    kprint = 10 # amount of divisions in 1 cardiac cycle
+    kprint = 8 # amount of divisions in 1 cardiac cycle
     if nnn % (nduration/kprint) == 0:
         k = int((nnn/nduration) * kprint) % kprint
         cycle = int(nnn/nduration)+1
@@ -1671,6 +1707,7 @@ while nnn < nlast + 1: # time step loop
         Qinmean_CoW[47,cycle_no] = Qmeantree[47,cycle_no]
         Qinmean_CoW[56,cycle_no] = Qmeantree[56,cycle_no]
 
+    hot_start_buffer = 0 # freezes regulation for first n cycles (updated by Thomas 250326)
     # every two cardiac cycles, test if converged and regulate
     if nnn % (nduration * 2) == 0:
 
@@ -1833,7 +1870,7 @@ while nnn < nlast + 1: # time step loop
 
                 # 5. Apply to the Base Geometric Resistance
                 # R_base is stored in RCtree[arteryno, 0]
-                R_base = RCtree[arteryno, 0]
+                R_base = RCtree[arteryno, 0] * 0.8
 
                 if sim_LMA == 0:
                     # Change R2 (Distal) for non-LMA models
@@ -1857,91 +1894,95 @@ while nnn < nlast + 1: # time step loop
 
         # if if_conv == 0, regulate if any regulations are active
         if if_conv == 0:
+            if cycle_no > hot_start_buffer and hot_start_load == 1:
 
-            # change total peripheral resistance to fit mean blood pressure if PR_reg_total == 1
-            if PR_reg_total == 1:
-                Parm_mean = Pmeantree[17,cycle_no] # mean pressure at artery no. 17 [mmHg]
-                coeff_pr = 1.0 - alpha * (Parm_mean - Parm_ref) / Parm_ref # coefficient to change peripheral resistance
-                for i in range(1, nartery + 1):
-                    if mbif_par[i,0] == 0 and (i<58 or i>70): # exclude cerebral arteries
-                        R_total = RLCtree[2,i,1] + RLCtree[2,i,2] # total peripheral resistance
-                        RLCtree[2,i,2] -= R_total * alpha * (Parm_mean - Parm_ref) / Parm_ref 
-                        # RLCtree[2,i,1] *= coeff_pr # change peripheral resistance
-                        # RLCtree[2,i,2] *= coeff_pr # change peripheral resistance
-                        if RLCtree[2,i,2] < 0.0:
-                            RLCtree[2,i,2] = 0.0
-                            print(f"RLCtree[2,{i},2] < 0.0, set to 0.0")
-                Rtotalchange *= coeff_pr # update the total peripheral resistance 
+                # change total peripheral resistance to fit mean blood pressure if PR_reg_total == 1
+                if PR_reg_total == 1:
+                    Parm_mean = Pmeantree[17,cycle_no] # mean pressure at artery no. 17 [mmHg]
+                    coeff_pr = 1.0 - alpha * (Parm_mean - Parm_ref) / Parm_ref # coefficient to change peripheral resistance
+                    for i in range(1, nartery + 1):
+                        if mbif_par[i,0] == 0 and (i<58 or i>70): # exclude cerebral arteries
+                            R_total = RLCtree[2,i,1] + RLCtree[2,i,2] # total peripheral resistance
+                            RLCtree[2,i,2] -= R_total * alpha * (Parm_mean - Parm_ref) / Parm_ref
+                            # RLCtree[2,i,1] *= coeff_pr # change peripheral resistance
+                            # RLCtree[2,i,2] *= coeff_pr # change peripheral resistance
+                            if RLCtree[2,i,2] < 0.0:
+                                RLCtree[2,i,2] = 0.0
+                                print(f"RLCtree[2,{i},2] < 0.0, set to 0.0")
+                    Rtotalchange *= coeff_pr # update the total peripheral resistance
 
-            # change cerebral peripheral resistance to fit measured blood flow rate if PR_reg_cerebral == 1 
-            if PR_reg_cereb == 1: # regulating cerebral peripheral resistance
+                # change cerebral peripheral resistance to fit measured blood flow rate if PR_reg_cerebral == 1
+                if PR_reg_cereb == 1: # regulating cerebral peripheral resistance
 
-                if sim_LMA == 0: # if not simulating LMA
-                    for i in range(0,6):
-                        arteryno = n_CoW[i] # artery no. of the CoW
-                        coeff_4DFLOW = 1.0 - alpha * (Qref[arteryno,0] - Qoutmean_CoW[arteryno,0]) / Qref[arteryno,0]
-                        coeff_CoW[arteryno,0] = coeff_4DFLOW # store the coefficient for CoW regulation
+                    if sim_LMA == 0: # if not simulating LMA
+                        for i in range(0,6):
+                            arteryno = n_CoW[i] # artery no. of the CoW
+                            coeff_4DFLOW = 1.0 - alpha * (Qref[arteryno,0] - Qoutmean_CoW[arteryno,0]) / Qref[arteryno,0]
+                            coeff_CoW[arteryno,0] = coeff_4DFLOW # store the coefficient for CoW regulation
 
-                        RLCtree[2,arteryno,1] *= coeff_CoW[arteryno,0] # change CoW peripheral resistance
-                        RLCtree[2,arteryno,2] *= coeff_CoW[arteryno,0]
+                            RLCtree[2,arteryno,1] *= coeff_CoW[arteryno,0] # change CoW peripheral resistance
+                            RLCtree[2,arteryno,2] *= coeff_CoW[arteryno,0]
 
-                if sim_LMA == 1: # if simulating LMA
+                    if sim_LMA == 1: # if simulating LMA
 
-                    # regulating R1-R3: 4Dflow and SPECT
-                    for i in range(0,6):
-                        arteryno = n_CoW[i] # artery no. of the CoW
-                        coeff_CoW[arteryno,0] = 1.0 - alpha_4DFlow * (Qref[arteryno,0] - Qoutmean_CoW[arteryno,0]) / Qref[arteryno,0] # store the coefficient for CoW regulation
-                        coeff_CoW[arteryno,1] = 1.0 - alpha_SPECT * (Qref[arteryno,1] - Qoutmean_CoW[arteryno,1]) / Qref[arteryno,1] # store the coefficient for SPECT regulation
-                        
-                        # change R1,R2 for 4Dflow regulation
-                        RLCtree[2,arteryno,1] *= coeff_CoW[arteryno,0] # change CoW peripheral resistance R1
-                        RLCtree[2,arteryno,2] *= coeff_CoW[arteryno,0]
+                        # regulating R1-R3: 4Dflow and SPECT
+                        for i in range(0,6):
+                            arteryno = n_CoW[i] # artery no. of the CoW
+                            coeff_CoW[arteryno,0] = 1.0 - alpha_4DFlow * (Qref[arteryno,0] - Qoutmean_CoW[arteryno,0]) / Qref[arteryno,0] # store the coefficient for CoW regulation
+                            coeff_CoW[arteryno,1] = 1.0 - alpha_SPECT * (Qref[arteryno,1] - Qoutmean_CoW[arteryno,1]) / Qref[arteryno,1] # store the coefficient for SPECT regulation
 
-                        # change R3 for SPECT regulation
-                        RLCtree[2,arteryno,3] *= coeff_CoW[arteryno,1]
+                            # change R1,R2 for 4Dflow regulation
+                            RLCtree[2,arteryno,1] *= coeff_CoW[arteryno,0] # change CoW peripheral resistance R1
+                            RLCtree[2,arteryno,2] *= coeff_CoW[arteryno,0]
 
-                        print(f"R1,R2(4Dflow),R3(SPECT) of {arteryno} updated to {RLCtree[2,arteryno,1]:.4f}, {RLCtree[2,arteryno,2]:.4f}, {RLCtree[2,arteryno,3]:.4f} for regulation")
+                            # change R3 for SPECT regulation
+                            RLCtree[2,arteryno,3] *= coeff_CoW[arteryno,1]
 
-                    if PR_reg_LMA == 1:
+                            print(f"R1,R2(4Dflow),R3(SPECT) of {arteryno} updated to {RLCtree[2,arteryno,1]:.4f}, {RLCtree[2,arteryno,2]:.4f}, {RLCtree[2,arteryno,3]:.4f} for regulation")
 
-                        print("Regulating LMA resistance...")
-                        # change RLMA <- If main trunk converged
-                        if conv_cerebral_4dflow == 1 and conv_cerebral_SPECT == 1:
-                            for i in range(0,numlma):
-                                if Qref[84+i,2] * Qoutmean_CoW[nartery+1+i,2] > 0.0:
-                                    coeff_CoW[84+i,2] = 1.0 - alpha_LMA * (abs(Qref[84+i,2]) - abs(Qoutmean_CoW[nartery+1+i,2])) / abs(Qref[84+i,2]) # store the coefficient for LMA regulation
-                                    RLCtree[2,84+i,1] *= coeff_CoW[84+i,2] # change LMA peripheral resistance RLMA
-                                    print(f"RLMA of {84+i}: coeff_CoW = {coeff_CoW[84+i,2]}, RLMA = {RLCtree[2,84+i,1]} for regulation")
+                        if PR_reg_LMA == 1:
 
-            # change radii of communicating arteries to fit measured flow rates if r_com_reg == 1
-            # !!! currently, we do not know what this is meant to fit !!! 
-            if r_com_reg == 1:
-                cycle_no = int(nnn / nduration) # current number of cardiac cycles
-                for j in [64,59,69]: # ACom (No.64), Rt.PCom (No.59), Lt.PCom (No.69)
-                    if j == 64:
-                        Q_reg = Qinmean_CoW[40,cycle_no] + Qinmean_CoW[47,cycle_no]
-                        Qref_reg = Qref[40,0] + Qref[47,0]
-                        rfac = (Qref_reg * Qinmean_CoW[40,cycle_no] 
-                                - Q_reg * Qref[40,0]) / (Q_reg * Qref[40,0])
-                    if j == 59:
-                        Q_reg = Qinmean_CoW[47,cycle_no] + Qinmean_CoW[56,cycle_no]
-                        Qref_reg = Qref[47,0] + Qref[56,0]
-                        rfac = (Qref_reg * Qinmean_CoW[47,cycle_no] 
-                                - Q_reg * Qref[47,0]) / (Q_reg * Qref[47,0])
-                    if j == 69:
-                        Q_reg = Qinmean_CoW[40,cycle_no] + Qinmean_CoW[56,cycle_no]
-                        Qref_reg = Qref[40,0] + Qref[56,0]
-                        rfac = (Qref_reg * Qinmean_CoW[40,cycle_no] 
-                                - Q_reg * Qref[40,0]) / (Q_reg * Qref[40,0])
-                    if Qinmean_CoW[j,cycle_no] < 0.0:
-                        rfac = - 1.0 * rfac
-                    for i in range(0,imaxtree[j]+1):
-                        Rtree0[j,i] = Rtree0[j,i] * (1.0 + 2.0 * rfac) # original coeff: 0.5
-                        Atree[j,i]  = pi * (Rtree0[j,i]**2.0)
-                        A0[j,i]     = Atree[j,i]
-                        Atreem[j,i] = Atree[j,i]
-                        Ptreem[j,i] = Ptreem[j,0]
-                        Utreem[j,i] = Qtreem[j,0] / Atreem[j,i]
+                            print("Regulating LMA resistance...")
+                            # change RLMA <- If main trunk converged
+                            if conv_cerebral_4dflow == 1 and conv_cerebral_SPECT == 1:
+                                for i in range(0,numlma):
+                                    if Qref[84+i,2] * Qoutmean_CoW[nartery+1+i,2] > 0.0:
+                                        coeff_CoW[84+i,2] = 1.0 - alpha_LMA * (abs(Qref[84+i,2]) - abs(Qoutmean_CoW[nartery+1+i,2])) / abs(Qref[84+i,2]) # store the coefficient for LMA regulation
+                                        RLCtree[2,84+i,1] *= coeff_CoW[84+i,2] # change LMA peripheral resistance RLMA
+                                        print(f"RLMA of {84+i}: coeff_CoW = {coeff_CoW[84+i,2]}, RLMA = {RLCtree[2,84+i,1]} for regulation")
+
+                # change radii of communicating arteries to fit measured flow rates if r_com_reg == 1
+                # !!! currently, we do not know what this is meant to fit !!!
+                if r_com_reg == 1:
+                    cycle_no = int(nnn / nduration) # current number of cardiac cycles
+                    for j in [64,59,69]: # ACom (No.64), Rt.PCom (No.59), Lt.PCom (No.69)
+                        if j == 64:
+                            Q_reg = Qinmean_CoW[40,cycle_no] + Qinmean_CoW[47,cycle_no]
+                            Qref_reg = Qref[40,0] + Qref[47,0]
+                            rfac = (Qref_reg * Qinmean_CoW[40,cycle_no]
+                                    - Q_reg * Qref[40,0]) / (Q_reg * Qref[40,0])
+                        if j == 59:
+                            Q_reg = Qinmean_CoW[47,cycle_no] + Qinmean_CoW[56,cycle_no]
+                            Qref_reg = Qref[47,0] + Qref[56,0]
+                            rfac = (Qref_reg * Qinmean_CoW[47,cycle_no]
+                                    - Q_reg * Qref[47,0]) / (Q_reg * Qref[47,0])
+                        if j == 69:
+                            Q_reg = Qinmean_CoW[40,cycle_no] + Qinmean_CoW[56,cycle_no]
+                            Qref_reg = Qref[40,0] + Qref[56,0]
+                            rfac = (Qref_reg * Qinmean_CoW[40,cycle_no]
+                                    - Q_reg * Qref[40,0]) / (Q_reg * Qref[40,0])
+                        if Qinmean_CoW[j,cycle_no] < 0.0:
+                            rfac = - 1.0 * rfac
+                        for i in range(0,imaxtree[j]+1):
+                            Rtree0[j,i] = Rtree0[j,i] * (1.0 + 2.0 * rfac) # original coeff: 0.5
+                            Atree[j,i]  = pi * (Rtree0[j,i]**2.0)
+                            A0[j,i]     = Atree[j,i]
+                            Atreem[j,i] = Atree[j,i]
+                            Ptreem[j,i] = Ptreem[j,0]
+                            Utreem[j,i] = Qtreem[j,0] / Atreem[j,i]
+
+            else:
+                print(f"Cycle {cycle_no}: Hot start settling. Regulation frozen.")
                         
         # if if_conv == 1 do one last loop of calculation
         elif if_conv == 1:
@@ -2070,11 +2111,14 @@ while nnn < nlast + 1: # time step loop
                 row = [LMAno, RLCtree[2,LMAno,1], RLCtree[2,LMAno,2], RLCtree[2,LMAno,3], 1.0 / RLCtree[3,LMAno,1], 1.0 / RLCtree[1,LMAno,2]]
                 writer.writerow(row)
 
-        # for hot start, edited by Thomas 240226
-        np.savez(checkpoint_file,
-                 Qtree=Qtree, Atree=Atree, Utree=Utree, Ptree=Ptree,
-                 Vtree0d=Vtree0d, Qtree0d=Qtree0d, result=result, RLCtree=RLCtree)
-        print(f">>> Hot-start state saved to {checkpoint_file}")
+        if hot_start_save == 1:
+            # for hot start, edited by Thomas 240226
+            np.savez(checkpoint_file_save,
+                     Qtree=Qtree, Atree=Atree, Utree=Utree, Ptree=Ptree,
+                     Atreem1=Atreem1, Utreem1=Utreem1,
+                     v=v, dv=dv, q=q, dvq=dvq,
+                     Vtree0d=Vtree0d, Qtree0d=Qtree0d, result=result, RLCtree=RLCtree)
+            print(f">>> Hot-start state saved to {checkpoint_file_save}")
 
     # output visualization data
     if ((visualization == 1 and (nnn >= viz_str * nduration and nnn <= viz_end * nduration)) or (visualization == 2 and (nnn >= nlast-nduration and nnn <= nlast))):
@@ -2118,6 +2162,8 @@ while nnn < nlast + 1: # time step loop
 
     # output convergence data
     if nnn % (nduration * 2) == 0:
+        if 'coeff_pr' not in locals() and 'coeff_pr' not in globals():
+            coeff_pr = 0
         cycle_no = int(nnn / nduration) # current number of cardiac cycles
         with open(PR_Adjustedcsv, mode='a', newline='', encoding = 'utf-8') as file:
             writer = csv.writer(file)
@@ -2478,18 +2524,18 @@ while nnn < nlast + 1: # time step loop
 
     nnn += 1 # increment the time step
 
-profiler.disable()
-
-# Create a Stats object
-stats = pstats.Stats(profiler)
-
-# Sort by total time and print the top 5
-print("Top 20 functions by total time:")
-stats.sort_stats(SortKey.TIME).print_stats(20)
-
-# Sort by average time and print the top 5
-print("\nTop 20 functions by average time per call:")
-stats.sort_stats(SortKey.CALLS).print_stats(20)
+# profiler.disable()
+#
+# # Create a Stats object
+# stats = pstats.Stats(profiler)
+#
+# # Sort by total time and print the top 5
+# print("Top 20 functions by total time:")
+# stats.sort_stats(SortKey.TIME).print_stats(20)
+#
+# # Sort by average time and print the top 5
+# print("\nTop 20 functions by average time per call:")
+# stats.sort_stats(SortKey.CALLS).print_stats(20)
 
 # close log file
 sys.stdout.flush() # flush stdout before closing the log file

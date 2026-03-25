@@ -1,3 +1,7 @@
+import cProfile
+import pstats
+import io
+
 import numpy as np
 import math
 from numba import njit, prange
@@ -453,35 +457,18 @@ def interface_01d(nnn, nartery, imaxtree, Atreem, Qtreem, Utreem, Qtree, Atree,
 
     while niter_0dcount < itermax_0d + 1:
 
-        result, P1u, q, v, dv, dvq, P_0d, Ptree0d, Qtree0d, Qguess, Vtree0d, Cval, Eval, Avalve = zerodmodel(nnn,
-                                                                                                             nartery,
-                                                                                                             mbif_par,
-                                                                                                             niter_0dcount,
-                                                                                                             nzeromodel,
-                                                                                                             Qguess,
-                                                                                                             result,
-                                                                                                             tee, tac,
-                                                                                                             tar, tcr,
-                                                                                                             q, v, dv,
-                                                                                                             dvq, rukuk,
-                                                                                                             P_0d,
-                                                                                                             Ptree0d,
-                                                                                                             Qtree0d,
-                                                                                                             Vtree0d,
-                                                                                                             P1u,
-                                                                                                             RLCtree,
-                                                                                                             numlma,
-                                                                                                             nzm_lma,
-                                                                                                             nzm_cowoutlet,
-                                                                                                             dt,
-                                                                                                             Tduration,
-                                                                                                             Cval, Eval,
-                                                                                                             Avalve,
-                                                                                                             arterynode_map,
-                                                                                                             i_upper_or_lower,
-                                                                                                             artery_to_0dindex,
-                                                                                                             sim_LMA,
-                                                                                                             disregard_LMA)
+        result, P1u, q, v, dv, dvq, P_0d, Ptree0d, Qtree0d, Qguess, Vtree0d, Cval, Eval, Avalve = zerodmodel(
+            nnn, nartery, mbif_par, niter_0dcount, nzeromodel,
+            Qguess, result,
+            tee, tac, tar, tcr,
+            q, v, dv, dvq, rukuk,
+            P_0d, Ptree0d, Qtree0d, Vtree0d, P1u,
+            RLCtree, numlma, nzm_lma, nzm_cowoutlet,
+            dt, Tduration,
+            Cval, Eval, Avalve,
+            arterynode_map, i_upper_or_lower, artery_to_0dindex,
+            sim_LMA, disregard_LMA
+        )
 
         niter_0dcount += 1
 
@@ -664,7 +651,7 @@ def zerodmodel(nnn,nartery,mbif_par,niter_0dcount,nzeromodel,Qguess,
                result,tee,tac,tar,tcr,q,v,dv,dvq,rukuk,
                P_0d,Ptree0d,Qtree0d,Vtree0d,P1u,RLCtree,numlma,nzm_lma,nzm_cowoutlet,
                dt,Tduration,Cval,Eval,Avalve,arterynode_map,i_upper_or_lower,artery_to_0dindex,sim_LMA,disregard_LMA):
-    
+
     # Unit conversion from 1d to 0d
     Qguess[1:nartery+1] = Qguess[1:nartery+1] / 1.0e-6 # [ml/s] to [m^3/s]
 
@@ -676,7 +663,7 @@ def zerodmodel(nnn,nartery,mbif_par,niter_0dcount,nzeromodel,Qguess,
 
     # compute calc_dv_dt to obtain current values of dv/dt
     dvq = calc_dv_dt(dvq, q, Qtree0d, Qguess, Eval)
-    
+
     # update dv
     for i in range(0,20):
         dv[i] = dvq[2*i+1] # dV/dt
@@ -705,7 +692,7 @@ def zerodmodel(nnn,nartery,mbif_par,niter_0dcount,nzeromodel,Qguess,
             Vtree0d[j] = result[i+1,1]
             Qtree0d[j] = result[i,1]
 
-    # update pressure at the end of the 0D model for coupling calculation: P1u 
+    # update pressure at the end of the 0D model for coupling calculation: P1u
     P1u.fill(0.0) # reset P1u array
     # aortic inlet
     Eaa = Eval[0] # Eaa
